@@ -1,0 +1,4 @@
+<project name="amel-expression-metadata-tasks" default="default" basedir=".">
+  <description>build amel-expression-metadata tasks</description>
+  <import file="../../../../imbuild/library.xml"/> 
+</project>

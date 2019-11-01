@@ -1,0 +1,5 @@
+<project name="amel-expression-metadata" default="default" basedir=".">
+  <description>build, test, package amel-expression-metadata</description>
+  
+  <import file="../../../imbuild/source.xml"/>
+</project>

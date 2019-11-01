@@ -1,0 +1,3059 @@
+<project type="bio">
+  <property name="target.model" value="genomic"/>
+  <property name="source.location" location="../bio/sources/"/>
+  <property name="common.os.prefix" value="common"/>
+  <property name="intermine.properties.file" value="hymenopteramine.properties"/>
+  <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
+
+  <!-- Ontologies -->
+  <source name="so" type="so">
+    <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
+  </source>
+
+  <source name="go" type="go">
+    <property name="src.data.file" location="/db/hymenopteramine_release_1.4_april2019/datasets/GO/go.obo"/>
+  </source>
+   
+    <source name="hao" type="hao">
+    <property name="src.data.file" location="/db/hymenopteramine_release_1.4_april2019/datasets/HAO/hao.obo"/>
+  </source>
+
+  <source name="evidence-ontology" type="evidence-ontology">
+    <property name="src.data.file" location="/db/hymenopteramine_release_1.4_april2019/datasets/ECO/eco.obo"/>
+  </source>
+
+<!--Genome Fasta-->
+  <source name="fasta-aech" type="fasta">
+    <property name="fasta.taxonId" value="103372"/>
+    <property name="fasta.dataSourceName" value="Acromyrmex echinatior Genome GCF_000204515.1_Aech_3.9"/>
+    <property name="fasta.dataSetTitle" value="Acromyrmex echinatior Genome Aech_3.9"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Aech_3.9"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/acromyrmex_echinatior/Aech_3.9"/>
+  </source>
+
+  <source name="fasta-acer" type="fasta">
+    <property name="fasta.taxonId" value="7461"/>
+    <property name="fasta.dataSourceName" value="Apis cerana Genome GCF_001442555.1_ACSNU-2.0"/>
+    <property name="fasta.dataSetTitle" value="Apis cerana Genome ACSNU-2.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ACSNU-2.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/apis_cerana/ACSNU-2.0"/>
+  </source>
+
+  <source name="fasta-ador" type="fasta">
+    <property name="fasta.taxonId" value="7462"/>
+    <property name="fasta.dataSourceName" value="Apis dorsata Genome GCF_000469605.1_Apis_dorsata_1.3"/>
+    <property name="fasta.dataSetTitle" value="Apis dorsata Genome Apis_dorsata_1.3"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Apis_dorsata_1.3"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/apis_dorsata/Apis_dorsata_1.3"/>
+  </source>
+
+  <source name="fasta-aflo" type="fasta">
+    <property name="fasta.taxonId" value="7463"/>
+    <property name="fasta.dataSourceName" value="Apis florea Genome GCF_000184785.2_Aflo_1.0"/>
+    <property name="fasta.dataSetTitle" value="Apis florea Genome Aflo_1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Aflo_1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/apis_florea/Aflo_1.0"/>
+  </source>
+
+  <source name="fasta-amel" type="fasta">
+    <property name="fasta.taxonId" value="7460"/>
+    <property name="fasta.dataSourceName" value="Apis mellifera Genome GCF_003254395.2_Amel_HAv3.1"/>
+    <property name="fasta.dataSetTitle" value="Apis mellifera Genome Amel_HAv3.1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Amel_HAv3.1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/apis_mellifera/Amel_HAv3.1"/>
+  </source>
+
+  <source name="fasta-aros" type="fasta">
+    <property name="fasta.taxonId" value="37344"/>
+    <property name="fasta.dataSourceName" value="Athalia rosae Genome GCF_000344095.2_Aros_2.0"/>
+    <property name="fasta.dataSetTitle" value="Athalia rosae Genome Aros_2.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Aros_2.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/athalia_rosae/Aros_2.0"/>
+  </source>
+
+  <source name="fasta-acep" type="fasta">
+    <property name="fasta.taxonId" value="12957"/>
+    <property name="fasta.dataSourceName" value="Atta cephalotes Genome GCF_000143395.1_Attacep1.0"/>
+    <property name="fasta.dataSetTitle" value="Atta cephalotes Genome Attacep1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Attacep1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/atta_cephalotes/Attacep1.0"/>
+  </source>
+
+  <source name="fasta-acol" type="fasta">
+    <property name="fasta.taxonId" value="520822"/>
+    <property name="fasta.dataSourceName" value="Atta colombica Genome GCF_001594045.1_Acol1.0"/>
+    <property name="fasta.dataSetTitle" value="Atta colombica Genome Acol1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Acol1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/atta_colombica/Acol1.0"/>
+  </source>
+
+  <source name="fasta-bimp" type="fasta">
+    <property name="fasta.taxonId" value="132113"/>
+    <property name="fasta.dataSourceName" value="Bombus impatiens Genome GCF_000188095.3_BIMP_2.2"/>
+    <property name="fasta.dataSetTitle" value="Bombus impatiens Genome BIMP_2.2"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="BIMP_2.2"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/bombus_impatiens/BIMP_2.2"/>
+  </source>
+
+  <source name="fasta-bter" type="fasta">
+    <property name="fasta.taxonId" value="30195"/>
+    <property name="fasta.dataSourceName" value="Bombus terrestris Genome GCF_000214255.1_Bter_1.0"/>
+    <property name="fasta.dataSetTitle" value="Bombus terrestris Genome Bter_1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Bter_1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/bombus_terrestris/Bter_1.0"/>
+  </source>
+
+  <source name="fasta-cflo" type="fasta">
+    <property name="fasta.taxonId" value="104421"/>
+    <property name="fasta.dataSourceName" value="Camponotus floridanus Genome GCF_003227725.1_Cflo_v7.5"/>
+    <property name="fasta.dataSetTitle" value="Camponotus floridanus Genome Cflo_v7.5"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Cflo_v7.5"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/camponotus_floridanus/Cflo_v7.5"/>
+  </source>
+
+  <source name="fasta-cobs" type="fasta">
+    <property name="fasta.taxonId" value="286306"/>
+    <property name="fasta.dataSourceName" value="Cardiocondyla obscurior Genome Cobs_1.4"/>
+    <property name="fasta.dataSetTitle" value="Cardiocondyla obscurior Genome Cobs_1.4"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Cobs_1.4"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/cardiocondyla_obscurior/Cobs_1.4"/>
+  </source>
+
+  <source name="fasta-ccin" type="fasta">
+    <property name="fasta.taxonId" value="211228"/>
+    <property name="fasta.dataSourceName" value="Cephus cinctus Genome GCF_000341935.1_Ccin1"/>
+    <property name="fasta.dataSetTitle" value="Cephus cinctus Genome Ccin1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Ccin1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/cephus_cinctus/Ccin1"/>
+  </source>
+
+  <source name="fasta-ccal" type="fasta">
+    <property name="fasta.taxonId" value="156304"/>
+    <property name="fasta.dataSourceName" value="Ceratina calcarata Genome GCF_001652005.1_ASM165200v1"/>
+    <property name="fasta.dataSetTitle" value="Ceratina calcarata Genome ASM165200v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM165200v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/ceratina_calcarata/ASM165200v1"/>
+  </source>
+
+  <source name="fasta-csol" type="fasta">
+    <property name="fasta.taxonId" value="142686"/>
+    <property name="fasta.dataSourceName" value="Ceratosolen solmsi Genome GCF_000503995.1_CerSol_1.0"/>
+    <property name="fasta.dataSetTitle" value="Ceratosolen solmsi Genome CerSol_1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="CerSol_1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/ceratosolen_solmsi/CerSol_1.0"/>
+  </source>
+
+  <source name="fasta-copflo" type="fasta">
+    <property name="fasta.taxonId" value="29053"/>
+    <property name="fasta.dataSourceName" value="Copidosoma floridanum Genome GCF_000648655.2_Cflo_2.0"/>
+    <property name="fasta.dataSetTitle" value="Copidosoma floridanum Genome Cflo_2.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Cflo_2.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/copidosoma_floridanum/Cflo_2.0"/>
+  </source>
+
+  <source name="fasta-ccos" type="fasta">
+    <property name="fasta.taxonId" value="456900"/>
+    <property name="fasta.dataSourceName" value="Cyphomyrmex costatus Genome GCF_001594065.1_Ccosl1.0"/>
+    <property name="fasta.dataSetTitle" value="Cyphomyrmex costatus Genome Ccosl1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Ccosl1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/cyphomyrmex_costatus/Ccosl1.0"/>
+  </source>
+
+  <source name="fasta-dall" type="fasta">
+    <property name="fasta.taxonId" value="454923"/>
+    <property name="fasta.dataSourceName" value="Diachasma alloeum Genome GCF_001412515.1_Dall1.0"/>
+    <property name="fasta.dataSetTitle" value="Diachasma alloeum Genome Dall1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Dall1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/diachasma_alloeum/Dall1.0"/>
+  </source>
+
+  <source name="fasta-dqua" type="fasta">
+    <property name="fasta.taxonId" value="609295"/>
+    <property name="fasta.dataSourceName" value="Dinoponera quadriceps Genome GCF_001313825.1_ASM131382v1"/>
+    <property name="fasta.dataSetTitle" value="Dinoponera quadriceps Genome ASM131382v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM131382v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/dinoponera_quadriceps/ASM131382v1"/>
+  </source>
+
+  <source name="fasta-dmel" type="fasta">
+    <property name="fasta.taxonId" value="7227"/>
+    <property name="fasta.dataSourceName" value="Drosophila melanogaster Genome GCF_000001215.4_Release_6_plus_ISO1_MT"/>
+    <property name="fasta.dataSetTitle" value="Drosophila melanogaster Genome Release_6_plus_ISO1_MT"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Release_6_plus_ISO1_MT"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/drosophila_melanogaster/Release_6_plus_ISO1_MT"/>
+  </source>
+
+  <source name="fasta-dnov" type="fasta">
+    <property name="fasta.taxonId" value="178035"/>
+    <property name="fasta.dataSourceName" value="Dufourea novaeangliae Genome GCF_001272555.1_ASM127255v1"/>
+    <property name="fasta.dataSetTitle" value="Dufourea novaeangliae Genome ASM127255v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM127255v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/dufourea_novaeangliae/ASM127255v1"/>
+  </source>
+
+  <source name="fasta-emex" type="fasta">
+    <property name="fasta.taxonId" value="516756"/>
+    <property name="fasta.dataSourceName" value="Eufriesea mexicana Genome GCF_001483705.1_ASM148370v1"/>
+    <property name="fasta.dataSetTitle" value="Eufriesea mexicana Genome ASM148370v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM148370v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/eufriesea_mexicana/ASM148370v1"/>
+  </source>
+
+  <source name="fasta-fari" type="fasta">
+    <property name="fasta.taxonId" value="64838"/>
+    <property name="fasta.dataSourceName" value="Fopius arisanus Genome GCF_000806365.1_ASM80636v1"/>
+    <property name="fasta.dataSetTitle" value="Fopius arisanus Genome ASM80636v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM80636v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/fopius_arisanus/ASM80636v1"/>
+  </source>
+
+  <source name="fasta-hlab" type="fasta">
+    <property name="fasta.taxonId" value="597456"/>
+    <property name="fasta.dataSourceName" value="Habropoda laboriosa Genome GCF_001263275.1_ASM126327v1"/>
+    <property name="fasta.dataSetTitle" value="Habropoda laboriosa Genome ASM126327v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM126327v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/habropoda_laboriosa/ASM126327v1"/>
+  </source>
+
+  <source name="fasta-hsal" type="fasta">
+    <property name="fasta.taxonId" value="610380"/>
+    <property name="fasta.dataSourceName" value="Harpegnathos saltator Genome GCF_003227715.1_Hsal_v8.5"/>
+    <property name="fasta.dataSetTitle" value="Harpegnathos saltator Genome Hsal_v8.5"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Hsal_v8.5"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/harpegnathos_saltator/Hsal_v8.5"/>
+  </source>
+
+  <source name="fasta-lalb" type="fasta">
+    <property name="fasta.taxonId" value="88501"/>
+    <property name="fasta.dataSourceName" value="Lasioglossum albipes Genome Lalb_v2"/>
+    <property name="fasta.dataSetTitle" value="Lasioglossum albipes Genome Lalb_v2"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Lalb_v2"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/lasioglossum_albipes/Lalb_v2"/>
+  </source>
+
+  <source name="fasta-lhum" type="fasta">
+    <property name="fasta.taxonId" value="83485"/>
+    <property name="fasta.dataSourceName" value="Linepithema humile Genome GCF_000217595.1_Lhum_UMD_V04"/>
+    <property name="fasta.dataSetTitle" value="Linepithema humile Genome Lhum_UMD_V04"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Lhum_UMD_V04"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/linepithema_humile/Lhum_UMD_V04"/>
+  </source>
+
+  <source name="fasta-mrot" type="fasta">
+    <property name="fasta.taxonId" value="143995"/>
+    <property name="fasta.dataSourceName" value="Megachile_rotundata Genome GCF_000220905.1_MROT_1.0"/>
+    <property name="fasta.dataSetTitle" value="Megachile_rotundata Genome MROT_1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="MROT_1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/megachile_rotundata/MROT_1.0"/>
+  </source>
+
+  <source name="fasta-mqua" type="fasta">
+    <property name="fasta.taxonId" value="166423"/>
+    <property name="fasta.dataSourceName" value="Melipona quadrifasciata Genome GCA_001276565.1_ASM127656v1"/>
+    <property name="fasta.dataSetTitle" value="Melipona quadrifasciata Genome ASM127656v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM127656v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/melipona_quadrifasciata/ASM127656v1"/>
+  </source>
+
+  <source name="fasta-mdem" type="fasta">
+    <property name="fasta.taxonId" value="69319"/>
+    <property name="fasta.dataSourceName" value="Microplitis demolitor Genome GCF_000572035.2_Mdem2"/>
+    <property name="fasta.dataSetTitle" value="Microplitis demolitor Genome Mdem2"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Mdem2"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/microplitis_demolitor/Mdem2"/>
+  </source>
+
+  <source name="fasta-mpha" type="fasta">
+    <property name="fasta.taxonId" value="307658"/>
+    <property name="fasta.dataSourceName" value="Monomorium pharaonis Genome GCF_003260585.2_ASM326058v2"/>
+    <property name="fasta.dataSetTitle" value="Monomorium pharaonis Genome ASM326058v2"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM326058v2"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/monomorium_pharaonis/ASM326058v2"/>
+  </source>
+
+  <source name="fasta-nvit" type="fasta">
+    <property name="fasta.taxonId" value="7425"/>
+    <property name="fasta.dataSourceName" value="Nasonia vitripennis Genome GCF_000002325.3_Nvit_2.1"/>
+    <property name="fasta.dataSetTitle" value="Nasonia vitripennis Genome Nvit_2.1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Nvit_2.1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/nasonia_vitripennis/Nvit_2.1"/>
+  </source>
+
+  <source name="fasta-nlec" type="fasta">
+    <property name="fasta.taxonId" value="441921"/>
+    <property name="fasta.dataSourceName" value="Neodiprion lecontei Genome GCF_001263575.1_Nlec1.0"/>
+    <property name="fasta.dataSetTitle" value="Neodiprion lecontei Genome Nlec1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Nlec1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/neodiprion_lecontei/Nlec1.0"/>
+  </source>
+
+  <source name="fasta-obir" type="fasta">
+    <property name="fasta.taxonId" value="2015173"/>
+    <property name="fasta.dataSourceName" value="Ooceraea biroi Genome GCF_003672135.1_Obir_v5.4"/>
+    <property name="fasta.dataSetTitle" value="Ooceraea biroi Genome Obir_v5.4"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Obir_v5.4"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/ooceraea_biroi/Obir_v5.4"/>
+  </source>
+
+  <source name="fasta-oabi" type="fasta">
+    <property name="fasta.taxonId" value="222816"/>
+    <property name="fasta.dataSourceName" value="Orussus abietinus Genome GCF_000612105.2_Oabi_2.0"/>
+    <property name="fasta.dataSetTitle" value="Orussus abietinus Genome Oabi_2.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Oabi_2.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/orussus_abietinus/Oabi_2.0"/>
+  </source>
+
+  <source name="fasta-pbar" type="fasta">
+    <property name="fasta.taxonId" value="144034"/>
+    <property name="fasta.dataSourceName" value="Pogonomyrmex barbatus Genome GCF_000187915.1_Pbar_UMD_V03"/>
+    <property name="fasta.dataSetTitle" value="Pogonomyrmex barbatus Genome Pbar_UMD_V03"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Pbar_UMD_V03"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/pogonomyrmex_barbatus/Pbar_UMD_V03"/>
+  </source>
+
+  <source name="fasta-pcan" type="fasta">
+    <property name="fasta.taxonId" value="91411"/>
+    <property name="fasta.dataSourceName" value="Polistes canadensis Genome GCF_001313835.1_ASM131383v1"/>
+    <property name="fasta.dataSetTitle" value="Polistes canadensis Genome ASM131383v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM131383v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/polistes_canadensis/ASM131383v1"/>
+  </source>
+
+  <source name="fasta-pdom" type="fasta">
+    <property name="fasta.taxonId" value="743375"/>
+    <property name="fasta.dataSourceName" value="Polistes dominula Genome GCF_001465965.1_Pdom_r1.2"/>
+    <property name="fasta.dataSetTitle" value="Polistes dominula Genome Pdom_r1.2"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Pdom_r1.2"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/polistes_dominula/Pdom_r1.2"/>
+  </source>
+
+  <source name="fasta-pgra" type="fasta">
+    <property name="fasta.taxonId" value="219809"/>
+    <property name="fasta.dataSourceName" value="Pseudomyrmex gracilis Genome GCF_002006095.1_ASM200609v1"/>
+    <property name="fasta.dataSetTitle" value="Pseudomyrmex gracilis Genome ASM200609v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM200609v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/pseudomyrmex_gracilis/ASM200609v1"/>
+  </source>
+
+  <source name="fasta-sinv" type="fasta">
+    <property name="fasta.taxonId" value="13686"/>
+    <property name="fasta.dataSourceName" value="Solenopsis invicta Genome GCF_000188075.2_Si_gnH"/>
+    <property name="fasta.dataSetTitle" value="Solenopsis invicta Genome Si_gnH"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Si_gnH"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/solenopsis_invicta/Si_gnH"/>
+  </source>
+
+  <source name="fasta-tcur" type="fasta">
+    <property name="fasta.taxonId" value="300111"/>
+    <property name="fasta.dataSourceName" value="Temnothorax curvispinosus Genome GCF_003070985.1_ASM307098v1"/>
+    <property name="fasta.dataSetTitle" value="Temnothorax curvispinosus Genome ASM307098v1"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="ASM307098v1"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/temnothorax_curvispinosus/ASM307098v1"/>
+  </source>
+
+  <source name="fasta-tcor" type="fasta">
+    <property name="fasta.taxonId" value="471704"/>
+    <property name="fasta.dataSourceName" value="Trachymyrmex cornetzi Genome GCF_001594075.1_Tcor1.0"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex cornetzi Genome Tcor1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Tcor1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/trachymyrmex_cornetzi/Tcor1.0"/>
+  </source>
+
+  <source name="fasta-tsep" type="fasta">
+    <property name="fasta.taxonId" value="34720"/>
+    <property name="fasta.dataSourceName" value="Trachymyrmex septentrionalis Genome GCF_001594115.1_Tsep1.0"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex septentrionalis Genome Tsep1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Tsep1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/trachymyrmex_septentrionalis/Tsep1.0"/>
+  </source>
+
+  <source name="fasta-tzet" type="fasta">
+    <property name="fasta.taxonId" value="64791"/>
+    <property name="fasta.dataSourceName" value="Trachymyrmex zeteki Genome GCF_001594055.1_Tzet1.0"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex zeteki Genome Tzet1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Tzet1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/trachymyrmex_zeteki/Tzet1.0"/>
+  </source>
+
+  <source name="fasta-tpre" type="fasta">
+    <property name="fasta.taxonId" value="7493"/>
+    <property name="fasta.dataSourceName" value="Trichogramma pretiosum Genome GCF_000599845.2_Tpre_2.0"/>
+    <property name="fasta.dataSetTitle" value="Trichogramma pretiosum Genome Tpre_2.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="Tpre_2.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/trichogramma_pretiosum/Tpre_2.0"/>
+  </source>
+
+  <source name="fasta-veme" type="fasta">
+    <property name="fasta.taxonId" value="411798"/>
+    <property name="fasta.dataSourceName" value="Vollenhovia emeryi Genome GCF_000949405.1_V.emery_V1.0"/>
+    <property name="fasta.dataSetTitle" value="Vollenhovia emeryi Genome V.emery_V1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="V.emery_V1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/vollenhovia_emeryi/V.emery_V1.0"/>
+  </source>
+
+  <source name="fasta-waur" type="fasta">
+    <property name="fasta.taxonId" value="64793"/>
+    <property name="fasta.dataSourceName" value="Wasmannia auropunctata Genome GCF_000956235.1_wasmannia.A_1.0"/>
+    <property name="fasta.dataSetTitle" value="Wasmannia auropunctata Genome wasmannia.A_1.0"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.assemblyVersion" value="wasmannia.A_1.0"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineArsFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/genome/wasmannia_auropunctata/wasmannia.A_1.0"/>
+  </source>
+
+  <!--Official Gene Set GFF-->
+  <!-- load amel-ogs-gff before amel-code-gff -->
+  <source name="amel-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="7460"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Apis mellifera OGS (amel_OGSv3.2)"/>
+    <property name="gff3.dataSourceName" value="Official Gene set"/>
+    <property name="gff3.seqAssemblyVersion" value="Amel_HAv3.1"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/apis_mellifera/Amel_HAv3.1"/>
+  </source>
+
+  <source name="acep-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="12957"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Atta cephalotes OGS (acep_OGSv1.2)"/>
+    <property name="gff3.dataSourceName" value="Official Gene set"/>
+    <property name="gff3.seqAssemblyVersion" value="Attacep1.0"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/atta_cephalotes/Attacep1.0"/>
+  </source>
+
+  <source name="mqua-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="166423"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Melipona quadrifasciata OGS (Melipona_quadrifasciata_v1.1_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="mqua_1.1"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/melipona_quadrifasciata/mqua_1.1"/>
+  </source>
+
+  <source name="hlab-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="597456"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Habropoda laboriosa OGS (Habropoda_laboriosa_v1.2_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM126327v1"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/habropoda_laboriosa/ASM126327v1"/>
+  </source>
+
+  <source name="emex-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="516756"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Eufriesea mexicana OGS (Eufriesea_mexicana_v1.1_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM148370v1"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/eufriesea_mexicana/ASM148370v1"/>
+  </source>
+
+  <source name="dnov-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="178035"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Dufourea novaeangliae OGS (Dufourea_novaeangliae_v1.1_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM127255v1"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/dufourea_novaeangliae/ASM127255v1"/>
+  </source>
+
+  <source name="mrot-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="143995"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Megachile rotundata OGS (Megachile_rotundata_v1.1_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="MROT_1.0"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/megachile_rotundata/MROT_1.0"/>
+  </source>
+
+  <source name="nvit-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="7425"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Nasoina vitripennis OGS (nvit_OGSv1.2)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Nvit_2.1"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/nasonia_vitripennis/Nvit_2.1/OGSv1.2"/>
+  </source>
+
+  <source name="nvit-ogs-gff-evi" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="7425"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Nasonia vitripennis Evidential Gene Set (Nvit_EviGene)"/>
+    <property name="gff3.dataSourceName" value="Evidential Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Nvit_2.1"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/nasonia_vitripennis/Nvit_2.1/evidential_gene_set"/>
+  </source>
+
+  <source name="bimp-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="132113"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Bombus impatiens OGS (bimp_OGSv1.0)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="BIMP_2.2"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/bombus_impatiens/BIMP_2.2"/>
+  </source>
+
+
+  <source name="cobs-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="286306"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Cardiocondyla obscurior OGS (cobs_OGSv1.4)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Cobs_1.4"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/cardiocondyla_obscurior/Cobs_1.4"/>
+  </source>
+
+  <source name="lalb-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="88501"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Lasioglossum albipes OGS (lalb_OGSv5.42_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Lalb_v2"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/lasioglossum_albipes/Lalb_v2"/>
+  </source>
+
+  <source name="lhum-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="83485"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Linepithema humile OGS (lhum_OGSv1.2)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Lhum_UMD_V04"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/linepithema_humile/Lhum_UMD_V04"/>
+  </source>
+
+  <source name="pbar-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="144034"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Pogonomyrmex barbatus OGS (pbar_OGSv1.2)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Pbar_UMD_V03"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/pogonomyrmex_barbatus/Pbar_UMD_V03"/>
+  </source>
+
+  <source name="hsal-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="610380"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Harpegnathos saltator OGS (hsal_OGSv3.3_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Hsal_v8.5"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/harpegnathos_saltator/Hsal_v8.5"/>
+  </source>
+
+  <source name="aech-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="103372"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Acromyrmex echinatior OGS (aech_OGSv3.8_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Aech_3.9"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/acromyrmex_echinatior/Aech_3.9"/>
+  </source>
+
+  <source name="sinv-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="13686"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Solenopsis invicta OGS (sinv_OGSv2.2.3_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Si_gnH"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/solenopsis_invicta/Si_gnH"/>
+  </source>
+
+  <source name="cflo-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="104421"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Camponotus floridanus OGS (cflo_OGSv3.3_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Cflo_v7.5"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/camponotus_floridanus/Cflo_v7.5"/>
+  </source>
+
+  <source name="obir-ogs-gff" type="ogs-gff" dump="true">
+    <property name="gff3.taxonId" value="2015173"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="gff3.dataSetTitle" value="Ooceraea biroi OGS (armyant.OGS.V1.8.6_HGD)"/>
+    <property name="gff3.dataSourceName" value="Official Gene Set"/>
+    <property name="gff3.seqAssemblyVersion" value="Obir_v5.4"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/annotation/ooceraea_biroi/Obir_v5.4"/>
+  </source>
+
+
+<!--RefSeq GFF-->
+
+  <source name="aech-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="103372"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Aech_3.9"/>
+    <property name="gff3.dataSetTitle" value="Acromyrmex echinatior RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/acromyrmex_echinatior/Aech_3.9/proteincoding"/>
+  </source>
+
+  <source name="aech-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="103372"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Aech_3.9"/>
+    <property name="gff3.dataSetTitle" value="Acromyrmex echinatior RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/acromyrmex_echinatior/Aech_3.9/noncoding"/>
+  </source>
+
+  <source name="acer-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7461"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ACSNU-2.0"/>
+    <property name="gff3.dataSetTitle" value="Apis cerana RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_cerana/ACSNU-2.0/proteincoding"/>
+  </source>
+
+  <source name="acer-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7461"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ACSNU-2.0"/>
+    <property name="gff3.dataSetTitle" value="Apis cerana RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_cerana/ACSNU-2.0/noncoding"/>
+  </source>
+
+  <source name="ador-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7462"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Apis_dorsata_1.3"/>
+    <property name="gff3.dataSetTitle" value="Apis dorsata RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_dorsata/Apis_dorsata_1.3/proteincoding"/>
+  </source>
+
+  <source name="ador-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7462"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Apis_dorsata_1.3"/>
+    <property name="gff3.dataSetTitle" value="Apis dorsata RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_dorsata/Apis_dorsata_1.3/noncoding"/>
+  </source>
+
+  <source name="aflo-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7463"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Aflo_1.0"/>
+    <property name="gff3.dataSetTitle" value="Apis florea RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_florea/Aflo_1.0/proteincoding"/>
+  </source>
+
+  <source name="aflo-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7463"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Aflo_1.0"/>
+    <property name="gff3.dataSetTitle" value="Apis florea RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_florea/Aflo_1.0/noncoding"/>
+  </source>
+
+  <source name="amel-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7460"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Amel_HAv3.1"/>
+    <property name="gff3.dataSetTitle" value="Apis mellifera RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_mellifera/Amel_HAv3.1/proteincoding"/>
+  </source>
+
+  <source name="amel-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7460"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Amel_HAv3.1"/>
+    <property name="gff3.dataSetTitle" value="Apis mellifera RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/apis_mellifera/Amel_HAv3.1/noncoding"/>
+  </source>
+
+  <source name="aros-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="37344"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Aros_2.0"/>
+    <property name="gff3.dataSetTitle" value="Athalia rosae RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/athalia_rosae/Aros_2.0/proteincoding"/>
+  </source>
+
+  <source name="aros-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="37344"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Aros_2.0"/>
+    <property name="gff3.dataSetTitle" value="Athalia rosae RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/athalia_rosae/Aros_2.0/noncoding"/>
+  </source>
+
+  <source name="acep-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="12957"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Attacep1.0"/>
+    <property name="gff3.dataSetTitle" value="Atta cephalotes RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/atta_cephalotes/Attacep1.0/proteincoding"/>
+  </source>
+
+  <source name="acep-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="12957"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Attacep1.0"/>
+    <property name="gff3.dataSetTitle" value="Atta cephalotes RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/atta_cephalotes/Attacep1.0/noncoding"/>
+  </source>
+
+  <source name="acol-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="520822"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Acol1.0"/>
+    <property name="gff3.dataSetTitle" value="Atta colombica RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/atta_colombica/Acol1.0/proteincoding"/>
+  </source>
+
+  <source name="acol-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="520822"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Acol1.0"/>
+    <property name="gff3.dataSetTitle" value="Atta colombica RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/atta_colombica/Acol1.0/noncoding"/>
+  </source>
+
+  <source name="bimp-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="132113"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="BIMP_2.2"/>
+    <property name="gff3.dataSetTitle" value="Bombus impatiens RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/bombus_impatiens/BIMP_2.2/proteincoding"/>
+  </source>
+
+  <source name="bimp-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="132113"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="BIMP_2.2"/>
+    <property name="gff3.dataSetTitle" value="Bombus impatiens RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/bombus_impatiens/BIMP_2.2/noncoding"/>
+  </source>
+
+  <source name="bter-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="30195"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Bter_1.0"/>
+    <property name="gff3.dataSetTitle" value="Bombus terrestris RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/bombus_terrestris/Bter_1.0/proteincoding"/>
+  </source>
+
+  <source name="bter-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="30195"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Bter_1.0"/>
+    <property name="gff3.dataSetTitle" value="Bombus terrestris RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/bombus_terrestris/Bter_1.0/noncoding"/>
+  </source>
+
+  <source name="cflo-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="104421"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Cflo_v7.5"/>
+    <property name="gff3.dataSetTitle" value="Camponotus floridanus RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/camponotus_floridanus/Cflo_v7.5/proteincoding"/>
+  </source>
+
+  <source name="cflo-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="104421"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Cflo_v7.5"/>
+    <property name="gff3.dataSetTitle" value="Camponotus floridanus RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/camponotus_floridanus/Cflo_v7.5/noncoding"/>
+  </source>
+
+  <source name="ccin-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="211228"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Ccin1"/>
+    <property name="gff3.dataSetTitle" value="Cephus cinctus RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/cephus_cinctus/Ccin1/proteincoding"/>
+  </source>
+
+  <source name="ccin-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="211228"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Ccin1"/>
+    <property name="gff3.dataSetTitle" value="Cephus cinctus RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/cephus_cinctus/Ccin1/noncoding"/>
+  </source>
+
+  <source name="ccal-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="156304"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM165200v1"/>
+    <property name="gff3.dataSetTitle" value="Ceratina calcarata RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/ceratina_calcarata/ASM165200v1/proteincoding"/>
+  </source>
+
+  <source name="ccal-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="156304"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM165200v1"/>
+    <property name="gff3.dataSetTitle" value="Ceratina calcarata RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/ceratina_calcarata/ASM165200v1/noncoding"/>
+  </source>
+
+  <source name="csol-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="142686"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="CerSol_1.0"/>
+    <property name="gff3.dataSetTitle" value="Ceratosolen solmsi RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/ceratosolen_solmsi/CerSol_1.0/proteincoding"/>
+  </source>
+
+  <source name="csol-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="142686"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="CerSol_1.0"/>
+    <property name="gff3.dataSetTitle" value="Ceratosolen solmsi RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/ceratosolen_solmsi/CerSol_1.0/noncoding"/>
+  </source>
+
+  <source name="copflo-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="29053"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Cflo_2.0"/>
+    <property name="gff3.dataSetTitle" value="Copidosoma floridanum RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/copidosoma_floridanum/Cflo_2.0/proteincoding"/>
+  </source>
+
+  <source name="copflo-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="29053"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Cflo_2.0"/>
+    <property name="gff3.dataSetTitle" value="Copidosoma floridanum RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/copidosoma_floridanum/Cflo_2.0/noncoding"/>
+  </source>
+
+  <source name="ccos-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="456900"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Ccosl1.0"/>
+    <property name="gff3.dataSetTitle" value="Cyphomyrmex costatus RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/cyphomyrmex_costatus/Ccosl1.0/proteincoding"/>
+  </source>
+
+  <source name="ccos-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="456900"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Ccosl1.0"/>
+    <property name="gff3.dataSetTitle" value="Cyphomyrmex costatus RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/cyphomyrmex_costatus/Ccosl1.0/noncoding"/>
+  </source>
+
+  <source name="dall-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="454923"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Dall1.0"/>
+    <property name="gff3.dataSetTitle" value="Diachasma alloeum RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/diachasma_alloeum/Dall1.0/proteincoding"/>
+  </source>
+
+  <source name="dall-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="454923"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Dall1.0"/>
+    <property name="gff3.dataSetTitle" value="Diachasma alloeum RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/diachasma_alloeum/Dall1.0/noncoding"/>
+  </source>
+
+  <source name="dqua-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="609295"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM131382v1"/>
+    <property name="gff3.dataSetTitle" value="Dinoponera quadriceps RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/dinoponera_quadriceps/ASM131382v1/proteincoding"/>
+  </source>
+
+  <source name="dqua-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="609295"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM131382v1"/>
+    <property name="gff3.dataSetTitle" value="Dinoponera quadriceps RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/dinoponera_quadriceps/ASM131382v1/noncoding"/>
+  </source>
+
+  <source name="dmel-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7227"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Release_6_plus_ISO1_MT"/>
+    <property name="gff3.dataSetTitle" value="Drosophila melanogaster RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/drosophila_melanogaster/Release_6_plus_ISO1_MT/proteincoding"/>
+  </source>
+
+  <source name="dmel-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7227"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Release_6_plus_ISO1_MT"/>
+    <property name="gff3.dataSetTitle" value="Drosophila melanogaster RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/drosophila_melanogaster/Release_6_plus_ISO1_MT/noncoding"/>
+  </source>
+
+  <source name="dnov-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="178035"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM127255v1"/>
+    <property name="gff3.dataSetTitle" value="Dufourea novaeangliae RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/dufourea_novaeangliae/ASM127255v1/proteincoding"/>
+  </source>
+
+  <source name="dnov-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="178035"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM127255v1"/>
+    <property name="gff3.dataSetTitle" value="Dufourea novaeangliae RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/dufourea_novaeangliae/ASM127255v1/noncoding"/>
+  </source>
+
+  <source name="emex-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="516756"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM148370v1"/>
+    <property name="gff3.dataSetTitle" value="Eufriesea mexicana RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/eufriesea_mexicana/ASM148370v1/proteincoding"/>
+  </source>
+
+  <source name="emex-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="516756"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM148370v1"/>
+    <property name="gff3.dataSetTitle" value="Eufriesea mexicana RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/eufriesea_mexicana/ASM148370v1/noncoding"/>
+  </source>
+
+  <source name="fari-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="64838"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM80636v1"/>
+    <property name="gff3.dataSetTitle" value="Fopius arisanus RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/fopius_arisanus/ASM80636v1/proteincoding"/>
+  </source>
+
+  <source name="fari-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="64838"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM80636v1"/>
+    <property name="gff3.dataSetTitle" value="Fopius arisanus RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/fopius_arisanus/ASM80636v1/noncoding"/>
+  </source>
+
+  <source name="hlab-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="597456"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM126327v1"/>
+    <property name="gff3.dataSetTitle" value="Habropoda laboriosa RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/habropoda_laboriosa/ASM126327v1/proteincoding"/>
+  </source>
+
+  <source name="hlab-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="597456"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM126327v1"/>
+    <property name="gff3.dataSetTitle" value="Habropoda laboriosa RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/habropoda_laboriosa/ASM126327v1/noncoding"/>
+  </source>
+
+  <source name="hsal-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="610380"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Hsal_v8.5"/>
+    <property name="gff3.dataSetTitle" value="Harpegnathos saltator RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/harpegnathos_saltator/Hsal_v8.5/proteincoding"/>
+  </source>
+
+  <source name="hsal-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="610380"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Hsal_v8.5"/>
+    <property name="gff3.dataSetTitle" value="Harpegnathos saltator RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/harpegnathos_saltator/Hsal_v8.5/noncoding"/>
+  </source>
+
+  <source name="lhum-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="83485"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Lhum_UMD_V04"/>
+    <property name="gff3.dataSetTitle" value="Linepithema humile RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/linepithema_humile/Lhum_UMD_V04/proteincoding"/>
+  </source>
+
+  <source name="lhum-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="83485"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Lhum_UMD_V04"/>
+    <property name="gff3.dataSetTitle" value="Linepithema humile RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/linepithema_humile/Lhum_UMD_V04/noncoding"/>
+  </source>
+
+  <source name="mrot-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="143995"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="MROT_1.0"/>
+    <property name="gff3.dataSetTitle" value="Megachile_rotundata RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/megachile_rotundata/MROT_1.0/proteincoding"/>
+  </source>
+
+  <source name="mrot-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="143995"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="MROT_1.0"/>
+    <property name="gff3.dataSetTitle" value="Megachile_rotundata RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/megachile_rotundata/MROT_1.0/noncoding"/>
+  </source>
+
+  <source name="mdem-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="69319"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Mdem2"/>
+    <property name="gff3.dataSetTitle" value="Microplitis demolitor RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/microplitis_demolitor/Mdem2/proteincoding"/>
+  </source>
+
+  <source name="mdem-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="69319"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Mdem2"/>
+    <property name="gff3.dataSetTitle" value="Microplitis demolitor RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/microplitis_demolitor/Mdem2/noncoding"/>
+  </source>
+
+  <source name="mpha-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="307658"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM326058v2"/>
+    <property name="gff3.dataSetTitle" value="Monomorium pharaonis RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/monomorium_pharaonis/ASM326058v2/proteincoding"/>
+  </source>
+
+  <source name="mpha-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="307658"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM326058v2"/>
+    <property name="gff3.dataSetTitle" value="Monomorium pharaonis RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/monomorium_pharaonis/ASM326058v2/noncoding"/>
+  </source>
+
+  <source name="nvit-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7425"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Nvit_2.1"/>
+    <property name="gff3.dataSetTitle" value="Nasonia vitripennis RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/nasonia_vitripennis/Nvit_2.1/proteincoding"/>
+  </source>
+
+  <source name="nvit-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7425"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Nvit_2.1"/>
+    <property name="gff3.dataSetTitle" value="Nasonia vitripennis RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/nasonia_vitripennis/Nvit_2.1/noncoding"/>
+  </source>
+
+  <source name="nlec-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="441921"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Nlec1.0"/>
+    <property name="gff3.dataSetTitle" value="Neodiprion lecontei RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/neodiprion_lecontei/Nlec1.0/proteincoding"/>
+  </source>
+
+  <source name="nlec-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="441921"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Nlec1.0"/>
+    <property name="gff3.dataSetTitle" value="Neodiprion lecontei RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/neodiprion_lecontei/Nlec1.0/noncoding"/>
+  </source>
+
+  <source name="obir-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="2015173"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Obir_v5.4"/>
+    <property name="gff3.dataSetTitle" value="Ooceraea biroi RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/ooceraea_biroi/Obir_v5.4/proteincoding"/>
+  </source>
+
+  <source name="obir-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="2015173"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Obir_v5.4"/>
+    <property name="gff3.dataSetTitle" value="Ooceraea biroi RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/ooceraea_biroi/Obir_v5.4/noncoding"/>
+  </source>
+
+  <source name="oabi-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="222816"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Oabi_2.0"/>
+    <property name="gff3.dataSetTitle" value="Orussus abietinus RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/orussus_abietinus/Oabi_2.0/proteincoding"/>
+  </source>
+
+  <source name="oabi-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="222816"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Oabi_2.0"/>
+    <property name="gff3.dataSetTitle" value="Orussus abietinus RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/orussus_abietinus/Oabi_2.0/noncoding"/>
+  </source>
+
+  <source name="pbar-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="144034"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Pbar_UMD_V03"/>
+    <property name="gff3.dataSetTitle" value="Pogonomyrmex barbatus RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/pogonomyrmex_barbatus/Pbar_UMD_V03/proteincoding"/>
+  </source>
+
+  <source name="pbar-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="144034"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Pbar_UMD_V03"/>
+    <property name="gff3.dataSetTitle" value="Pogonomyrmex barbatus RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/pogonomyrmex_barbatus/Pbar_UMD_V03/noncoding"/>
+  </source>
+
+  <source name="pcan-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="91411"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM131383v1"/>
+    <property name="gff3.dataSetTitle" value="Polistes canadensis RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/polistes_canadensis/ASM131383v1/proteincoding"/>
+  </source>
+
+  <source name="pcan-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="91411"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM131383v1"/>
+    <property name="gff3.dataSetTitle" value="Polistes canadensis RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/polistes_canadensis/ASM131383v1/noncoding"/>
+  </source>
+
+  <source name="pdom-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="743375"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Pdom_r1.2"/>
+    <property name="gff3.dataSetTitle" value="Polistes dominula RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/polistes_dominula/Pdom_r1.2/proteincoding"/>
+  </source>
+
+  <source name="pdom-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="743375"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Pdom_r1.2"/>
+    <property name="gff3.dataSetTitle" value="Polistes dominula RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/polistes_dominula/Pdom_r1.2/noncoding"/>
+  </source>
+
+  <source name="pgra-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="219809"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM200609v1"/>
+    <property name="gff3.dataSetTitle" value="Pseudomyrmex gracilis RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/pseudomyrmex_gracilis/ASM200609v1/proteincoding"/>
+  </source>
+
+  <source name="pgra-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="219809"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM200609v1"/>
+    <property name="gff3.dataSetTitle" value="Pseudomyrmex gracilis RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/pseudomyrmex_gracilis/ASM200609v1/noncoding"/>
+  </source>
+
+  <source name="sinv-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="13686"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Si_gnH"/>
+    <property name="gff3.dataSetTitle" value="Solenopsis invicta RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/solenopsis_invicta/Si_gnH/proteincoding"/>
+  </source>
+
+  <source name="sinv-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="13686"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Si_gnH"/>
+    <property name="gff3.dataSetTitle" value="Solenopsis invicta RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/solenopsis_invicta/Si_gnH/noncoding"/>
+  </source>
+
+  <source name="tcur-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="300111"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM307098v1"/>
+    <property name="gff3.dataSetTitle" value="Temnothorax curvispinosus RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/temnothorax_curvispinosus/ASM307098v1/proteincoding"/>
+  </source>
+
+  <source name="tcur-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="300111"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="ASM307098v1"/>
+    <property name="gff3.dataSetTitle" value="Temnothorax curvispinosus RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/temnothorax_curvispinosus/ASM307098v1/noncoding"/>
+  </source>
+
+  <source name="tcor-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="471704"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tcor1.0"/>
+    <property name="gff3.dataSetTitle" value="Trachymyrmex cornetzi RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trachymyrmex_cornetzi/Tcor1.0/proteincoding"/>
+  </source>
+
+  <source name="tcor-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="471704"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tcor1.0"/>
+    <property name="gff3.dataSetTitle" value="Trachymyrmex cornetzi RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trachymyrmex_cornetzi/Tcor1.0/noncoding"/>
+  </source>
+
+  <source name="tsep-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="34720"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tsep1.0"/>
+    <property name="gff3.dataSetTitle" value="Trachymyrmex septentrionalis RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trachymyrmex_septentrionalis/Tsep1.0/proteincoding"/>
+  </source>
+
+  <source name="tsep-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="34720"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tsep1.0"/>
+    <property name="gff3.dataSetTitle" value="Trachymyrmex septentrionalis RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trachymyrmex_septentrionalis/Tsep1.0/noncoding"/>
+  </source>
+
+  <source name="tzet-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="64791"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tzet1.0"/>
+    <property name="gff3.dataSetTitle" value="Trachymyrmex zeteki RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trachymyrmex_zeteki/Tzet1.0/proteincoding"/>
+  </source>
+
+  <source name="tzet-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="64791"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tzet1.0"/>
+    <property name="gff3.dataSetTitle" value="Trachymyrmex zeteki RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trachymyrmex_zeteki/Tzet1.0/noncoding"/>
+  </source>
+
+  <source name="tpre-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7493"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tpre_2.0"/>
+    <property name="gff3.dataSetTitle" value="Trichogramma pretiosum RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trichogramma_pretiosum/Tpre_2.0/proteincoding"/>
+  </source>
+
+  <source name="tpre-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="7493"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="Tpre_2.0"/>
+    <property name="gff3.dataSetTitle" value="Trichogramma pretiosum RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/trichogramma_pretiosum/Tpre_2.0/noncoding"/>
+  </source>
+
+  <source name="veme-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="411798"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="V.emery_V1.0"/>
+    <property name="gff3.dataSetTitle" value="Vollenhovia emeryi RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/vollenhovia_emeryi/V.emery_V1.0/proteincoding"/>
+  </source>
+
+  <source name="veme-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="411798"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="V.emery_V1.0"/>
+    <property name="gff3.dataSetTitle" value="Vollenhovia emeryi RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/vollenhovia_emeryi/V.emery_V1.0/noncoding"/>
+  </source>
+
+  <source name="waur-code-gff" type="refseq-proteincoding-gff" dump="true">
+    <property name="gff3.taxonId" value="64793"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="wasmannia.A_1.0"/>
+    <property name="gff3.dataSetTitle" value="Wasmannia auropunctata RefSeq Protein Coding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/wasmannia_auropunctata/wasmannia.A_1.0/proteincoding"/>
+  </source>
+
+  <source name="waur-noncode-gff" type="refseq-noncoding-gff" dump="true">
+    <property name="gff3.taxonId" value="64793"/>
+    <property name="gff3.dataSourceName" value="NCBI RefSeq Annotation"/>
+    <property name="gff3.seqAssemblyVersion" value="wasmannia.A_1.0"/>
+    <property name="gff3.dataSetTitle" value="Wasmannia auropunctata RefSeq Noncoding Genes"/>
+    <property name="gff3.seqClsName" value="Chromosome"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/annotation/wasmannia_auropunctata/wasmannia.A_1.0/noncoding"/>
+  </source>
+
+
+
+
+  <!-- Official Gene Set (OGS) CDS and Protein fasta - only for species that do not have RefSeq genes -->
+
+  <source name="lalb-cds-fasta" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="88501"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.geneSource" value="lalb_OGSv5.42_HGD"/>
+    <property name="fasta.dataSetTitle" value="Lasioglossum albipes CDS Sequence (lalb_OGSv5.42_HGD)"/>
+    <property name="fasta.dataSourceName" value="Official Gene Set"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/cds_fasta/lasioglossum_albipes/Lalb_v2"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+  </source>
+
+  <source name="lalb-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="88501"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.geneSource" value="lalb_OGSv5.42_HGD"/>
+    <property name="fasta.dataSourceName" value="Official Gene Set"/>
+    <property name="fasta.dataSetTitle" value="Lasioglossum albipes Protein Sequence (lalb_OGSv5.42_HGD)"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/protein_fasta/lasioglossum_albipes/Lalb_v2"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+  </source>
+
+
+  <source name="cobs-cds-fasta" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="286306"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.geneSource" value="cobs_OGSv1.4"/>
+    <property name="fasta.dataSetTitle" value="Cardiocondyla obscurior CDS Sequence (cobs_OGSv1.4)"/>
+    <property name="fasta.dataSourceName" value="Official Gene Set"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/cds_fasta/cardiocondyla_obscurior/Cobs_1.4"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+  </source>
+
+  <source name="cobs-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="286306"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.geneSource" value="cobs_OGSv1.4"/>
+    <property name="fasta.dataSourceName" value="Official Gene Set"/>
+    <property name="fasta.dataSetTitle" value="Cardiocondyla obscurior Protein Sequence (cobs_OGSv1.4)"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/protein_fasta/cardiocondyla_obscurior/Cobs_1.4"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+  </source>
+
+  <source name="mqua-cds-fasta" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="166423"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.geneSource" value="Melipona_quadrifasciata_v1.1_HGD"/>
+    <property name="fasta.dataSetTitle" value="Melipona quadrifasciata CDS Sequence (Melipona_quadrifasciata_v1.1_HGD)"/>
+    <property name="fasta.dataSourceName" value="Official Gene Set"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/cds_fasta/melipona_quadrifasciata/mqua_1.1"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+  </source>
+
+  <source name="mqua-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="166423"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.geneSource" value="Melipona_quadrifasciata_v1.1_HGD"/>
+    <property name="fasta.dataSourceName" value="Official Gene Set"/>
+    <property name="fasta.dataSetTitle" value="Melipona quadrifasciata Protein Sequence (Melipona_quadrifasciata_v1.1_HGD)"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/OGS/protein_fasta/melipona_quadrifasciata/mqua_1.1"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+  </source>
+
+<!--RefSeq CDS and Protein Fasta-->
+  <source name="aech-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="103372"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Acromyrmex echinatior RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/acromyrmex_echinatior/Aech_3.9"/>
+  </source>
+
+  <source name="aech-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="103372"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Acromyrmex echinatior RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/acromyrmex_echinatior/Aech_3.9"/>
+  </source>
+
+  <source name="acer-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7461"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis cerana RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/apis_cerana/ACSNU-2.0"/>
+  </source>
+
+  <source name="acer-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7461"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis cerana RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/apis_cerana/ACSNU-2.0"/>
+  </source>
+
+  <source name="ador-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7462"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis dorsata RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/apis_dorsata/Apis_dorsata_1.3"/>
+  </source>
+
+  <source name="ador-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7462"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis dorsata RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/apis_dorsata/Apis_dorsata_1.3"/>
+  </source>
+
+  <source name="aflo-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7463"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis florea RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/apis_florea/Aflo_1.0"/>
+  </source>
+
+  <source name="aflo-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7463"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis florea RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/apis_florea/Aflo_1.0"/>
+  </source>
+
+  <source name="amel-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7460"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis mellifera RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/apis_mellifera/Amel_HAv3.1"/>
+  </source>
+
+  <source name="amel-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7460"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Apis mellifera RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/apis_mellifera/Amel_HAv3.1"/>
+  </source>
+
+  <source name="aros-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="37344"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Athalia rosae RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/athalia_rosae/Aros_2.0"/>
+  </source>
+
+  <source name="aros-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="37344"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Athalia rosae RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/athalia_rosae/Aros_2.0"/>
+  </source>
+
+  <source name="acep-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="12957"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Atta cephalotes RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/atta_cephalotes/Attacep1.0"/>
+  </source>
+
+  <source name="acep-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="12957"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Atta cephalotes RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/atta_cephalotes/Attacep1.0"/>
+  </source>
+
+  <source name="acol-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="520822"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Atta colombica RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/atta_colombica/Acol1.0"/>
+  </source>
+
+  <source name="acol-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="520822"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Atta colombica RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/atta_colombica/Acol1.0"/>
+  </source>
+
+  <source name="bimp-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="132113"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Bombus impatiens RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/bombus_impatiens/BIMP_2.2"/>
+  </source>
+
+  <source name="bimp-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="132113"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Bombus impatiens RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/bombus_impatiens/BIMP_2.2"/>
+  </source>
+
+  <source name="bter-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="30195"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Bombus terrestris RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/bombus_terrestris/Bter_1.0"/>
+  </source>
+
+  <source name="bter-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="30195"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Bombus terrestris RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/bombus_terrestris/Bter_1.0"/>
+  </source>
+
+  <source name="cflo-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="104421"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Camponotus floridanus RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/camponotus_floridanus/Cflo_v7.5"/>
+  </source>
+
+  <source name="cflo-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="104421"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Camponotus floridanus RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/camponotus_floridanus/Cflo_v7.5"/>
+  </source>
+
+  <source name="ccin-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="211228"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Cephus cinctus RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/cephus_cinctus/Ccin1"/>
+  </source>
+
+  <source name="ccin-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="211228"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Cephus cinctus RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/cephus_cinctus/Ccin1"/>
+  </source>
+
+  <source name="ccal-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="156304"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Ceratina calcarata RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/ceratina_calcarata/ASM165200v1"/>
+  </source>
+
+  <source name="ccal-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="156304"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Ceratina calcarata RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/ceratina_calcarata/ASM165200v1"/>
+  </source>
+
+  <source name="csol-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="142686"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Ceratosolen solmsi RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/ceratosolen_solmsi/CerSol_1.0"/>
+  </source>
+
+  <source name="csol-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="142686"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Ceratosolen solmsi RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/ceratosolen_solmsi/CerSol_1.0"/>
+  </source>
+
+  <source name="copflo-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="29053"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Copidosoma floridanum RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/copidosoma_floridanum/Cflo_2.0"/>
+  </source>
+
+  <source name="copflo-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="29053"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Copidosoma floridanum RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/copidosoma_floridanum/Cflo_2.0"/>
+  </source>
+
+  <source name="ccos-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="456900"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Cyphomyrmex costatus RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/cyphomyrmex_costatus/Ccosl1.0"/>
+  </source>
+
+  <source name="ccos-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="456900"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Cyphomyrmex costatus RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/cyphomyrmex_costatus/Ccosl1.0"/>
+  </source>
+
+  <source name="dall-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="454923"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Diachasma alloeum RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/diachasma_alloeum/Dall1.0"/>
+  </source>
+
+  <source name="dall-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="454923"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Diachasma alloeum RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/diachasma_alloeum/Dall1.0"/>
+  </source>
+
+  <source name="dqua-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="609295"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Dinoponera quadriceps RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/dinoponera_quadriceps/ASM131382v1"/>
+  </source>
+
+  <source name="dqua-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="609295"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Dinoponera quadriceps RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/dinoponera_quadriceps/ASM131382v1"/>
+  </source>
+
+  <source name="dmel-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7227"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Drosophila melanogaster RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/drosophila_melanogaster/Release_6_plus_ISO1_MT"/>
+  </source>
+
+  <source name="dmel-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7227"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Drosophila melanogaster RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/drosophila_melanogaster/Release_6_plus_ISO1_MT"/>
+  </source>
+
+  <source name="dnov-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="178035"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Dufourea novaeangliae RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/dufourea_novaeangliae/ASM127255v1"/>
+  </source>
+
+  <source name="dnov-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="178035"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Dufourea novaeangliae RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/dufourea_novaeangliae/ASM127255v1"/>
+  </source>
+
+  <source name="emex-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="516756"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Eufriesea mexicana RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/eufriesea_mexicana/ASM148370v1"/>
+  </source>
+
+  <source name="emex-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="516756"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Eufriesea mexicana RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/eufriesea_mexicana/ASM148370v1"/>
+  </source>
+
+  <source name="fari-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="64838"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Fopius arisanus RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/fopius_arisanus/ASM80636v1"/>
+  </source>
+
+  <source name="fari-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="64838"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Fopius arisanus RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/fopius_arisanus/ASM80636v1"/>
+  </source>
+
+  <source name="hlab-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="597456"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Habropoda laboriosa RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/habropoda_laboriosa/ASM126327v1"/>
+  </source>
+
+  <source name="hlab-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="597456"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Habropoda laboriosa RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/habropoda_laboriosa/ASM126327v1"/>
+  </source>
+
+  <source name="hsal-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="610380"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Harpegnathos saltator RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/harpegnathos_saltator/Hsal_v8.5"/>
+  </source>
+
+  <source name="hsal-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="610380"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Harpegnathos saltator RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/harpegnathos_saltator/Hsal_v8.5"/>
+  </source>
+
+  <source name="lhum-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="83485"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Linepithema humile RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/linepithema_humile/Lhum_UMD_V04"/>
+  </source>
+
+  <source name="lhum-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="83485"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Linepithema humile RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/linepithema_humile/Lhum_UMD_V04"/>
+  </source>
+
+  <source name="mrot-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="143995"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Megachile_rotundata RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/megachile_rotundata/MROT_1.0"/>
+  </source>
+
+  <source name="mrot-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="143995"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Megachile_rotundata RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/megachile_rotundata/MROT_1.0"/>
+  </source>
+
+  <source name="mdem-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="69319"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Microplitis demolitor RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/microplitis_demolitor/Mdem2"/>
+  </source>
+
+  <source name="mdem-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="69319"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Microplitis demolitor RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/microplitis_demolitor/Mdem2"/>
+  </source>
+
+  <source name="mpha-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="307658"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Monomorium pharaonis RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/monomorium_pharaonis/ASM326058v2"/>
+  </source>
+
+  <source name="mpha-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="307658"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Monomorium pharaonis RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/monomorium_pharaonis/ASM326058v2"/>
+  </source>
+
+  <source name="nvit-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7425"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Nasonia vitripennis RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/nasonia_vitripennis/Nvit_2.1"/>
+  </source>
+
+  <source name="nvit-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7425"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Nasonia vitripennis RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/nasonia_vitripennis/Nvit_2.1"/>
+  </source>
+
+  <source name="nlec-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="441921"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Neodiprion lecontei RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/neodiprion_lecontei/Nlec1.0"/>
+  </source>
+
+  <source name="nlec-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="441921"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Neodiprion lecontei RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/neodiprion_lecontei/Nlec1.0"/>
+  </source>
+
+  <source name="obir-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="2015173"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Ooceraea biroi RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/ooceraea_biroi/Obir_v5.4"/>
+  </source>
+
+  <source name="obir-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="2015173"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Ooceraea biroi RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/ooceraea_biroi/Obir_v5.4"/>
+  </source>
+
+  <source name="oabi-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="222816"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Orussus abietinus RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/orussus_abietinus/Oabi_2.0"/>
+  </source>
+
+  <source name="oabi-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="222816"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Orussus abietinus RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/orussus_abietinus/Oabi_2.0"/>
+  </source>
+
+  <source name="pbar-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="144034"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Pogonomyrmex barbatus RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/pogonomyrmex_barbatus/Pbar_UMD_V03"/>
+  </source>
+
+  <source name="pbar-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="144034"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Pogonomyrmex barbatus RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/pogonomyrmex_barbatus/Pbar_UMD_V03"/>
+  </source>
+
+  <source name="pcan-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="91411"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Polistes canadensis RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/polistes_canadensis/ASM131383v1"/>
+  </source>
+
+  <source name="pcan-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="91411"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Polistes canadensis RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/polistes_canadensis/ASM131383v1"/>
+  </source>
+
+  <source name="pdom-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="743375"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Polistes dominula RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/polistes_dominula/Pdom_r1.2"/>
+  </source>
+
+  <source name="pdom-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="743375"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Polistes dominula RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/polistes_dominula/Pdom_r1.2"/>
+  </source>
+
+  <source name="pgra-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="219809"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Pseudomyrmex gracilis RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/pseudomyrmex_gracilis/ASM200609v1"/>
+  </source>
+
+  <source name="pgra-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="219809"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Pseudomyrmex gracilis RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/pseudomyrmex_gracilis/ASM200609v1"/>
+  </source>
+
+  <source name="sinv-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="13686"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Solenopsis invicta RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/solenopsis_invicta/Si_gnH"/>
+  </source>
+
+  <source name="sinv-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="13686"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Solenopsis invicta RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/solenopsis_invicta/Si_gnH"/>
+  </source>
+
+  <source name="tcur-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="300111"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Temnothorax curvispinosus RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/temnothorax_curvispinosus/ASM307098v1"/>
+  </source>
+
+  <source name="tcur-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="300111"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Temnothorax curvispinosus RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/temnothorax_curvispinosus/ASM307098v1"/>
+  </source>
+
+  <source name="tcor-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="471704"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex cornetzi RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/trachymyrmex_cornetzi/Tcor1.0"/>
+  </source>
+
+  <source name="tcor-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="471704"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex cornetzi RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/trachymyrmex_cornetzi/Tcor1.0"/>
+  </source>
+
+  <source name="tsep-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="34720"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex septentrionalis RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/trachymyrmex_septentrionalis/Tsep1.0"/>
+  </source>
+
+  <source name="tsep-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="34720"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex septentrionalis RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/trachymyrmex_septentrionalis/Tsep1.0"/>
+  </source>
+
+  <source name="tzet-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="64791"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex zeteki RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/trachymyrmex_zeteki/Tzet1.0"/>
+  </source>
+
+  <source name="tzet-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="64791"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trachymyrmex zeteki RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/trachymyrmex_zeteki/Tzet1.0"/>
+  </source>
+
+  <source name="tpre-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7493"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trichogramma pretiosum RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/trichogramma_pretiosum/Tpre_2.0"/>
+  </source>
+
+  <source name="tpre-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="7493"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Trichogramma pretiosum RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/trichogramma_pretiosum/Tpre_2.0"/>
+  </source>
+
+  <source name="veme-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="411798"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Vollenhovia emeryi RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/vollenhovia_emeryi/V.emery_V1.0"/>
+  </source>
+
+  <source name="veme-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="411798"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Vollenhovia emeryi RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/vollenhovia_emeryi/V.emery_V1.0"/>
+  </source>
+
+  <source name="waur-cds" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="64793"/>
+    <property name="fasta.dataSourceName" value="RefSeq Coding Sequence"/>
+    <property name="fasta.dataSetTitle" value="Wasmannia auropunctata RefSeq Coding Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="dna"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineCDSFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/cds_fasta/wasmannia_auropunctata/wasmannia.A_1.0"/>
+  </source>
+
+  <source name="waur-protein" type="fasta" dump="true">
+    <property name="fasta.taxonId" value="64793"/>
+    <property name="fasta.dataSourceName" value="RefSeq Protein Sequence"/>
+    <property name="fasta.dataSetTitle" value="Wasmannia auropunctata RefSeq Protein Sequence"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Polypeptide"/>
+    <property name="fasta.classAttribute" value="primaryIdentifier"/>
+    <property name="fasta.sequenceType" value="protein"/>
+    <property name="fasta.includes" value="*.fa"/>
+    <property name="fasta.geneSource" value="RefSeq"/>
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.BovineProteinFastaLoaderTask"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/RefSeq/protein_fasta/wasmannia_auropunctata/wasmannia.A_1.0"/>
+  </source>
+
+<!--Datasets that are not gff or fasta (except UniProt fasta which needs to be loaded after UniProt)-->
+
+  <source name="biogrid" type="biogrid">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/biogrid"/>
+    <property name="src.data.dir.includes" value="*.xml"/>
+    <property name="biogrid.organisms" value="7227 7460"/>
+  </source>
+
+  <source name="psi-intact" type="psi" dump="true">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/Intact"/>
+    <property name="intact.organisms" value="7227"/>
+  </source>
+
+<!--
+  <source name="orthodb-hymenoptera" type="orthodb">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/Orthodb/Hymenoptera"/>
+    <property name="orthodb.organisms" value="30195 7463 7462 143995 132113 7425 7460 83485 104421 13686 103372 610380 144034 2015173 178035 64793 166423 597456 516756 286306 88501"/>
+  </source>
+
+  <source name="orthodb-holometabola" type="orthodb">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/Orthodb/Holometabola"/>
+    <property name="orthodb.organisms" value="30195 7463 7462 143995 132113 7425 7460 7227 83485 104421 13686 103372 610380 144034 2015173 178035 64793 166423 597456 516756 286306 88501"/>
+  </source>
+-->
+
+  <source name="orthodb" type="orthodb">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/Orthodb/combined"/>
+    <property name="orthodb.organisms" value="30195 7463 7462 143995 132113 7425 7460 83485 104421 13686 103372 610380 144034 2015173 178035 64793 166423 597456 516756 286306 88501 7227"/>
+  </source>
+
+ <!--Both iterations of UniProt must be loaded before reactome, interpro, protein2ipr, GO-annotation--> 
+  <!--First interation Uniprot-->
+  <source name="uniprot-to-ncbi" type="uniprot" >
+    <property name="uniprot.organisms" value="7227 7425 7460 7461 7462 7463 7493 13686 14143 30195 34720 37344 64791 64793 64838 67767 69319 83485 88501 91411 103372 104421 132113 142686 143995 144034 156304 166423 178035 211228 219809 222816 286306 300111 307658 411798 441921 454923 456900 471704 516756 597456 609295 610380 743375 2015173 5433791"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/uniprot/"/>
+    <property name="creatego" value="true"/>
+    <property name="creategenes" value="true"/>
+    <property name="allowduplicates" value="false"/>
+    <property name="loadfragments" value="false"/>
+    <property name="loadtrembl" value="true"/>
+  </source>
+
+<!--Second iteration Uniprot-->
+  <source name="uniprot-to-ogs" type="uniprot" >
+    <property name="uniprot.organisms" value="7227 7425 7460"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/uniprot/"/>
+    <property name="creatego" value="true"/>
+    <property name="creategenes" value="true"/>
+    <property name="allowduplicates" value="false"/>
+    <property name="loadfragments" value="false"/>
+    <property name="loadtrembl" value="true"/>
+  </source>
+
+  <source name="uniprot-fasta" type="fasta">
+    <property name="fasta.taxonId" value="7227 7425 7460 7461 7462 7463 7493 13686 14143 30195 34720 37344 64791 64793 64838 67767 69319 83485 88501 91411 103372 104421 132113 142686 143995 144034 156304 166423 178035 211228 219809 222816 286306 300111 307658 411798 441921 454923 456900 471704 516756 597456 609295 610380 743375 2015173 5433791"/>
+    <property name="fasta.className" value="org.intermine.model.bio.Protein"/>
+    <property name="fasta.classAttribute" value="primaryAccession"/>
+    <property name="fasta.dataSetTitle" value="UniProt Fasta"/>
+    <property name="fasta.dataSourceName" value="UniProt"/>
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/uniprot"/>
+    <property name="fasta.includes" value="uniprot_sprot_varsplic.fasta"/>
+    <property name="fasta.sequenceType" value="protein" />
+    <property name="fasta.loaderClassName" value="org.intermine.bio.dataconversion.UniProtFastaLoaderTask"/>
+  </source>
+
+  <source name="uniprot-keywords" type="uniprot-keywords">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/uniprot"/>
+    <property name="src.data.dir.includes" value="keywlist.xml"/>
+  </source>
+
+  <source name="interpro" type="interpro">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/Interpro"/>
+  </source>
+
+  <source name="protein2ipr" type="protein2ipr">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/protein2ipr"/>
+    <property name="src.data.dir.includes" value="protein2ipr.dat"/>
+  </source>
+
+<!--leave GO-annotation out for this load
+  <source name="go-annotation" type="go-annotation">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/GO-Annotation/"/>
+    <property name="ontologyPrefix" value="GO"/>
+  </source>
+-->
+
+  <source name="reactome" type="reactome">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/reactome" />
+    <property name="reactome.organisms" value="7227" />
+  </source>
+  
+  <source name="kegg" type="kegg-pathway">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/KEGG_genes/"/>
+    <property name="kegg.organisms" value="7227 7425 7460 12957 103372 132113 30195 104421 610380 83485 144034 13686 307658 609295 219809 2015173 91411 69319"/>
+  </source>
+
+    <source name="kegg-metadata" type="kegg-metadata">
+      <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/KEGG_meta/"/>
+      <property name="src.data.dir.includes" value="*.tab"/>
+    </source>
+
+
+  <!-- xRef and Aliases -->
+  <source name="amel-alias" type="aliases">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/amel/"/>
+    <property name="taxonId" value="7460"/>
+  </source>
+
+  <source name="amel-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/amel"/>
+    <property name="taxonId" value="7460"/>
+  </source>
+
+  <source name="acep-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/acep"/>
+    <property name="taxonId" value="12957"/>
+  </source>
+
+  <source name="bimp-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/bimp"/>
+    <property name="taxonId" value="132113"/>
+  </source>
+
+  <source name="nvit-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/nvit"/>
+    <property name="taxonId" value="7425"/>
+  </source>
+
+  <source name="mrot-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/mrot"/>
+    <property name="taxonId" value="143995"/>
+  </source>
+
+  <source name="mrot-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/mrot"/>
+    <property name="taxonId" value="143995"/>
+  </source>
+
+  <source name="aech-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/aech"/>
+    <property name="taxonId" value="103372"/>
+  </source>
+
+  <source name="obir-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/obir"/>
+    <property name="taxonId" value="2015173"/>
+  </source>
+
+  <source name="cflo-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/cflo"/>
+    <property name="taxonId" value="104421"/>
+  </source>
+
+  <source name="dnov-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/dnov"/>
+    <property name="taxonId" value="178035"/>
+  </source>
+
+  <source name="hsal-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/hsal"/>
+    <property name="taxonId" value="610380"/>
+  </source>
+
+  <source name="lhum-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/lhum"/>
+    <property name="taxonId" value="83485"/>
+  </source>
+
+  <source name="pbar-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/pbar"/>
+    <property name="taxonId" value="144034"/>
+  </source>
+
+  <source name="sinv-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/sinv"/>
+    <property name="taxonId" value="13686"/>
+  </source>
+
+  <source name="dmel-xref" type="cross-references">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/xref/dmel"/>
+    <property name="taxonId" value="7227"/>
+  </source>
+
+  <source name="aech-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/aech/"/>
+    <property name="taxonId" value="103372"/>
+  </source>
+
+  <source name="obir-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/obir/"/>
+    <property name="taxonId" value="2015173"/>
+  </source>
+
+  <source name="cflo-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/cflo/"/>
+    <property name="taxonId" value="104421"/>
+  </source>
+
+  <source name="dnov-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/dnov/"/>
+    <property name="taxonId" value="178035"/>
+  </source>
+
+  <source name="emex-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/emex/"/>
+    <property name="taxonId" value="516756"/>
+  </source>
+
+  <source name="hlab-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/hlab/"/>
+    <property name="taxonId" value="597456"/>
+  </source>
+
+  <source name="hsal-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/hsal/"/>
+    <property name="taxonId" value="610380"/>
+  </source>
+
+  <source name="lalb-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/lalb/"/>
+    <property name="taxonId" value="88501"/>
+  </source>
+
+  <source name="mqua-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/mqua/"/>
+    <property name="taxonId" value="166423"/>
+  </source>
+
+  <source name="sinv-alias" type="aliasesTranscript">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/alias/sinv/"/>
+    <property name="taxonId" value="13686"/>
+  </source>
+
+  <source name="pubmed" type="pubmed-gene">
+    <property name="src.data.dir" location="/db/hymenopteramine_release_1.4_april2019/datasets/Pubmed" />
+    <property name="pubmed.organisms" value="30195 7463 7462 143995 132113 7425 7460 7227 83485 104421 13686 103372 610380 144034 2015173 178035 64793 166423 597456 516756 286306 88501"/>
+    <property name="src.data.dir.includes" value="gene2pubmed"/>
+    <property name="infoFile" location="/db/hymenopteramine_release_1.4_april2019/datasets/Pubmed/gene_info"/>
+  </source>
+
+  <source name="entrez-organism" type="entrez-organism">
+    <property name="src.data.file" location="build/organisms.xml"/>
+  </source>
+
+  <source name="update-publications" type="update-publications" dump="true">
+    <property name="src.data.file" location="build/publications.xml"/>
+    <property name="cacheDirName" value="build/"/>
+    <property name="loadFullRecord" value="true"/>
+  </source>
+
+  <!-- NOTE: below source is NOT to be loaded - but being included so that necessary SNP, etc. classes get created -->
+  <!-- which some postprocessing steps depend on -->
+  <!-- DBSNP Variation -->
+  <source name="amel-dbsnp-variation" type="dbsnp-variation" dump="true">
+    <property name="src.data.dir" location="/irving-array4/db/intermine/hymenopteramine_release_1.3_September2017/datasets/dbSNP/dbSNP/"/>
+    <property name="src.data.dir.includes" value="*.vcf"/>
+  </source>
+
+  <post-processing>
+    <post-process name="create-chromosome-locations-and-lengths"/>
+    <post-process name="create-references"/>
+    <post-process name="transfer-sequences"/>
+    <post-process name="create-overlap-view"/>
+    <post-process name="create-location-overlap-index"/>
+    <!--<post-process name="create-gene-flanking-features"/>-->
+    <post-process name="do-sources"/>
+    <post-process name="create-attribute-indexes"/>
+    <post-process name="create-search-index"/>
+    <post-process name="summarise-objectstore"/>
+    <post-process name="create-autocomplete-index"/>
+  </post-processing>
+</project>
