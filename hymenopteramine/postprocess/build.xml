@@ -1,7 +1,0 @@
-<project name="hymenopteramine-postprocess" default="default" basedir=".">
-
-  <description>perform post processing for hymenopteramine</description>
-
-  <import file="../../imbuild/postprocess.xml"/>
-
-</project>

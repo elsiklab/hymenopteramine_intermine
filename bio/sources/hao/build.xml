@@ -1,5 +1,0 @@
-<project name="hao" default="default" basedir=".">
-  <description>build, test, package hao</description>
-  
-  <import file="../../../imbuild/source.xml"/>
-</project>

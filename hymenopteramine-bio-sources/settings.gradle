@@ -1,0 +1,17 @@
+rootProject.name = 'bio-sources'
+include ':bio-source-evidence-ontology'
+project(':bio-source-evidence-ontology').projectDir = new File(settingsDir, './evidence-ontology')
+include ':bio-source-hao'
+project(':bio-source-hao').projectDir = new File(settingsDir, './hao')
+include ':bio-source-ogs-gff'
+project(':bio-source-ogs-gff').projectDir = new File(settingsDir, './ogs-gff')
+include ':bio-source-refseq-proteincoding-gff'
+project(':bio-source-refseq-proteincoding-gff').projectDir = new File(settingsDir, './refseq-proteincoding-gff')
+include ':bio-source-refseq-noncoding-gff'
+project(':bio-source-refseq-noncoding-gff').projectDir = new File(settingsDir, './refseq-noncoding-gff')
+include ':bio-source-kegg-metadata'
+project(':bio-source-kegg-metadata').projectDir = new File(settingsDir, './kegg-metadata')
+include ':bio-source-aliases'
+project(':bio-source-aliases').projectDir = new File(settingsDir, './aliases')
+include ':bio-source-cross-references'
+project(':bio-source-cross-references').projectDir = new File(settingsDir, './cross-references')

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+<!-- add any <class> elements here -->
+  <class name="Chromosome" extends="SequenceFeature" is-interface="true">
+    <attribute name="assembly" type="java.lang.String"/>
+    <attribute name="tertiaryIdentifier" type="java.lang.String"/>
+  </class>
+
+  <class name="CodingSequence" extends="BioEntity" is-interface="true">
+    <attribute name="length" type="java.lang.Integer"/>
+    <attribute name="proteinIdentifier" type="java.lang.String"/>
+    <reference name="gene" referenced-type="Gene" reverse-reference="codingSequences"/>
+    <reference name="sequence" referenced-type="Sequence"/>
+    <reference name="transcript" referenced-type="Transcript" reverse-reference="codingSequences"/>
+  </class>
+
+  <class name="Gene" is-interface="true">
+    <attribute name="source" type="java.lang.String"/>
+    <collection name="polypeptides" referenced-type="Polypeptide" reverse-reference="gene"/>
+    <collection name="codingSequences" referenced-type="CodingSequence" reverse-reference="gene"/>
+  </class>
+
+  <class name="MRNA" extends="Transcript" is-interface="true">
+    <attribute name="proteinIdentifier" type="java.lang.String"/>
+    <!-- Really one-to-one relationship but use is discouraged so defining "collection" instead -->
+    <collection name="polypeptide" referenced-type="Polypeptide" reverse-reference="mrna"/>
+  </class>
+
+  <class name="Transcript" extends="SequenceFeature" is-interface="true">
+    <attribute name="proteinIdentifier" type="java.lang.String"/>
+    <collection name="codingSequences" referenced-type="CodingSequence" reverse-reference="transcript"/>
+  </class>
+
+  <class name="Polypeptide" extends="BioEntity" is-interface="true">
+    <attribute name="geneIdentifier" type="java.lang.String"/>
+    <attribute name="mrnaIdentifier" type="java.lang.String"/>
+    <reference name="gene" referenced-type="Gene" reverse-reference="polypeptides"/>
+    <reference name="mrna" referenced-type="MRNA" reverse-reference="polypeptide"/>
+  </class>
+</classes>

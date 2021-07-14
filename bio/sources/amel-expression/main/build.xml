@@ -1,4 +1,0 @@
-<project name="amel-expression-tasks" default="default" basedir=".">
-  <description>build amel-expression tasks</description>
-  <import file="../../../../imbuild/library.xml"/> 
-</project>

@@ -1,5 +1,0 @@
-<project name="amel-expression" default="default" basedir=".">
-  <description>build, test, package amel-expression</description>
-  
-  <import file="../../../imbuild/source.xml"/>
-</project>
