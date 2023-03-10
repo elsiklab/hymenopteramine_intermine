@@ -36,31 +36,26 @@
 
 <definition name="friendlyMineLinkDisplayer.tile" path="/model/friendlyMineLinkDisplayer.jsp" controllerUrl="/initFriendlyMineLinkDisplayer.do"/>
 
+<definition name="releaseUpdates.page" extends="layout.template">
+  <put name="body" value="releaseUpdates.title"/>
+  <put name="pageName" value="releaseUpdates"/>
+</definition>
+<definition name="releaseUpdates.title" path="/releaseUpdates.jsp" />
+
+<definition name="taxonomy.page" extends="layout.template">
+    <put name="body" value="taxonomy.tile"/>
+    <put name="pageName" value="taxonomy"/>
+</definition>
+<definition name="taxonomy.tile" path="/taxonomy.jsp"/>
+
 <definition name="blast.page" extends="layout.template">
     <put name="body" value="blast.tile"/>
     <put name="pageName" value="blast"/>
 </definition>
-
 <definition name="blast.tile" path="/blast.jsp"/>
 
-<!--
- <definition name="network.page" extends="layout.template">
-    <put name="body" value="network.tile"/>
-    <put name="pageName" value="network"/>
-</definition>
-
-<definition name="network.tile" path="/network.jsp"/>
--->
 <definition name="help.page" extends="layout.template">
     <put name="body" value="help.tile"/>
     <put name="pageName" value="Help"/>
 </definition>
-
 <definition name="help.tile" path="/help.jsp"/>
-
-<definition name="updates.page" extends="layout.template">
-    <put name="body" value="updates.tile"/>
-    <put name="pageName" value="updates"/>
-</definition>
-
-<definition name="updates.tile" path="/updates.jsp"/>

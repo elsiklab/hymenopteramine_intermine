@@ -216,7 +216,6 @@ class IntegrateUtils {
         ant.convertGFF3File(converter: "org.intermine.bio.dataconversion.GFF3Converter",
                 target: "osw." + COMMON_OS_PREFIX + "-tgt-items",
                 seqClsName: BioSourceProperties.getUserProperty(source, "gff3.seqClsName"),
-                //seqAssemblyVersion: BioSourceProperties.getUserProperty(source, "gff3.seqAssemblyVersion"),
                 orgTaxonId: BioSourceProperties.getUserProperty(source, "gff3.taxonId"),
                 dataSourceName: BioSourceProperties.getUserProperty(source, "gff3.dataSourceName"),
                 seqDataSourceName: BioSourceProperties.getUserProperty(source, "gff3.seqDataSourceName"),
@@ -225,6 +224,9 @@ class IntegrateUtils {
                 model: "genomic",
                 handlerClassName: bioSourceProperties.getProperty("gff3.handlerClassName"),
                 seqHandlerClassName: gff3SeqHandlerClassName,
+                seqAssemblyVersion: BioSourceProperties.getUserProperty(source, "gff3.seqAssemblyVersion"),
+                loadDuplicateEntities: BioSourceProperties.getUserProperty(source, "gff3.loadDuplicateEntities"),
+                loadSequenceAlterations: BioSourceProperties.getUserProperty(source, "gff3.loadSequenceAlterations"),
                 licence: licence) {
             fileset(dir: BioSourceProperties.getUserProperty(source, "src.data.dir"),
                     includes: includes)
@@ -284,7 +286,7 @@ class IntegrateUtils {
                     ant.project.setProperty(propName, prop.value)
                 }
             }
-            def fastaClassLoader = BioSourceProperties.getUserProperty(source, "fasta.loaderClassName")
+            def fastaClassLoader = BioSourceProperties.getUserProperty(source, source.type + ".loaderClassName")
             if (fastaClassLoader != null) {
                 classname = fastaClassLoader
             } else {

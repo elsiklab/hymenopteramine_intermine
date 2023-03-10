@@ -1,24 +1,19 @@
-<!doctype html>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/struts-tiles.tld" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- homologueDisplayer.jsp -->
-<div id="homologue-displayer" class="collection-table">
 
-<div class="header">
+<div id="homologue-displayer" class="collection-table">
 <h3>Homologues</h3>
-</div>
 
 <c:choose>
 <c:when test="${homologues != null && !empty homologues}">
-
-
 <table class="tiny-font">
   <tbody>
     <c:forEach items="${homologues}" var="entry">
-<tr><th><c:out value="${entry.key}"/></th>
+    <tr><th><c:out value="${entry.key}"/></th>
       <c:set var="genes" value="${entry.value}"/>
       <c:choose>
         <c:when test="${empty genes}">
@@ -41,7 +36,7 @@
         </c:otherwise>
       </c:choose>
     </c:forEach>
-</tr>
+    </tr>
   </tbody>
 </table>
 </c:when>

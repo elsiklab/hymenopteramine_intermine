@@ -35,10 +35,23 @@
     </div>
   </c:if>
   <div id="header">
-    <a href="${WEB_PROPERTIES['project.sitePrefix']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="model/images/logo.png" width="45px" height="43px" alt="Logo" /></a>
-    <h1><html:link href="${WEB_PROPERTIES['project.sitePrefix']}/"><c:out value="${WEB_PROPERTIES['project.title']}" escapeXml="false"/></html:link></h1>
+    <c:if test="${WEB_PROPERTIES['branding.images.displayLogo'] == 'true'}">
+      <a href="${WEB_PROPERTIES['project.sitePrefix']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="${WEB_PROPERTIES['branding.images.logo']}" width="45px" height="43px" alt="Logo" /></a>
+    </c:if>
+    <h1>
+      <html:link href="${WEB_PROPERTIES['project.sitePrefix']}/">
+        <c:choose>
+          <c:when test="${!empty WEB_PROPERTIES['project.titlefancy']}">
+            <c:out value="${WEB_PROPERTIES['project.titlefancy']}" escapeXml="false"/>
+	  </c:when>
+	  <c:otherwise>
+	    <c:out value="${WEB_PROPERTIES['project.title']}" escapeXml="false"/>
+	  </c:otherwise>
+	</c:choose>
+      </html:link>
+    </h1>
     <p id="version"><fmt:message key="header.version"/> <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/></span>
-    <p><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p>
+    <p>&nbsp;&nbsp;&nbsp;<c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p>
   </div>
 
     <!-- Tab Menu -->
@@ -56,7 +69,7 @@
         </a>
       </li>
       <li id="templates"  <c:if test="${tab == 'templates'}">class="activelink"</c:if>>
-        <a href="/${WEB_PROPERTIES['webapp.path']}/templates.do">
+         <a href="/${WEB_PROPERTIES['webapp.path']}/templates.do">
           <fmt:message key="menu.templates"/>
         </a>
       </li>
@@ -71,32 +84,39 @@
         </a>
       </li>
       <c:if test="${WEB_PROPERTIES['genomicRegionSearch.display'] == 'true'}">
-        <li id="genomicRegionSearch" <c:if test="${tab == 'genomicRegionSearch'}">class="activelink"</c:if>>
-          <a href="/${WEB_PROPERTIES['webapp.path']}/genomicRegionSearch.do">
-            <fmt:message key="menu.genomicRegionSearch"/>
-          </a>
-        </li>
+          <li id="genomicRegionSearch" <c:if test="${tab == 'genomicRegionSearch'}">class="activelink"</c:if>>
+            <a href="/${WEB_PROPERTIES['webapp.path']}/genomicRegionSearch.do">
+              <fmt:message key="menu.genomicRegionSearch"/>
+            </a>
+          </li>
       </c:if>
       <li id="category" <c:if test="${tab == 'dataCategories'}">class="activelink"</c:if>>
         <a href="/${WEB_PROPERTIES['webapp.path']}/dataCategories.do">
           <fmt:message key="menu.dataCategories"/>
         </a>
       </li>
-      <li id="help"  <c:if test="${tab == 'help'}">class="activelink"</c:if>>
-        <a href="https://hymenoptera-intermine.readthedocs.io/en/v1.5/">
+      <li id="ortho" <c:if test="${tab == 'taxonomy'}">class="activelink"</c:if>>
+        <a href="/${WEB_PROPERTIES['webapp.path']}/taxonomy.do">
+          <fmt:message key="menu.taxonomy"/>
+        </a>
+      </li>
+      <li id="Help" <c:if test="${tab == 'Help'}">class="activelink"</c:if>>
+        <a href="${WEB_PROPERTIES['project.helpLocation']}" target="_blank">
           <fmt:message key="menu.help"/>
         </a>
       </li>
-      <li id="api"  <c:if test="${tab == 'api'}">class="activelink"</c:if>>
+      <li id="api" <c:if test="${tab == 'api'}">class="activelink"</c:if>>
         <a href="/${WEB_PROPERTIES['webapp.path']}/api.do">
           <fmt:message key="menu.api"/>
         </a>
       </li>
-      <li id="blast"  <c:if test="${tab == 'blast'}">class="activelink"</c:if>>
-        <a href="http://128.206.116.8/hgd-sequenceserver">
-          <fmt:message key="menu.blast"/>
-        </a>
-      </li>
+      <c:if test="${WEB_PROPERTIES['blast.display'] == 'true'}">
+        <li id="blast" <c:if test="${tab == 'blast'}">class="activelink"</c:if>>
+          <a href="${WEB_PROPERTIES['blast.url']}" target="_blank">
+            <fmt:message key="menu.blast"/>
+          </a>
+        </li>
+      </c:if>
     </ul>
   <ul id="loginbar">
         <li><a href="#" onclick="showContactForm();return false;"><fmt:message key="feedback.link"/></a></li>

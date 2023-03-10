@@ -1,7 +1,7 @@
 package org.intermine.bio.web.model;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -177,7 +177,7 @@ public final class GeneModelCache
                 qcTranscript, query, os);
         settings.hasFivePrimeUTRs = doesTranscriptHave("FivePrimeUTR", "fivePrimeUTR",
                 qcTranscript, query, os);
-        settings.hasCDSs = doesTranscriptHave("CDS", "CDSs", qcTranscript, query, os);
+        settings.hasCodingSequences = doesTranscriptHave("CodingSequence", "codingSequences", qcTranscript, query, os);
 
         return settings;
     }

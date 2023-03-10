@@ -1,7 +1,7 @@
 package org.intermine.bio.web.struts;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -296,7 +296,7 @@ public class GenomicRegionSearchAjaxAction extends Action
             List<List<String>> exportResults = new ArrayList<List<String>>();
 
             String[] hearderArr = {"DB identifier", "Symbol", "Chr",
-                "Start", "End", "User input"};
+                "Start", "End", "Assembly", "User input"};
             List<String> headerList = new ArrayList<String>(Arrays.asList(hearderArr));
 
             int extendedSize = featureMap.keySet().iterator().next().getExtendedRegionSize();
@@ -318,11 +318,12 @@ public class GenomicRegionSearchAjaxAction extends Action
                         String pid = l.get(1);
                         String symbol = l.get(2);
                         String chr = l.get(4);
-                        String start = l.get(5);
-                        String end = l.get(6);
+                        String chrAssembly = l.get(5);
+                        String start = l.get(6);
+                        String end = l.get(7);
                         String userInput = e.getKey().getOriginalRegion();
 
-                        String[] rowArr = {pid, symbol, chr, start, end, userInput};
+                        String[] rowArr = {pid, symbol, chr, start, end, chrAssembly, userInput};
                         List<String> row = new ArrayList<String>(Arrays.asList(rowArr));
 
                         if (extendedSize > 0) {

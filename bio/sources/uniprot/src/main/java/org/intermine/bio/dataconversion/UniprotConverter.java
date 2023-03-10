@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -44,14 +44,15 @@ import java.util.Stack;
  *
  * Differs from UniProtConverter in that this Converter creates proper protein items.
  * UniProtConverter creates protein objects, that are really uniprot entries.
+ *
+ * Modified version also loads ECOTerms.
+ *
  * @author Julie Sullivan
- * (Modified from InterMine version.)
+ * @author
  */
 public class UniprotConverter extends BioDirectoryConverter
 {
     //private static final UniprotConfig CONFIG = new UniprotConfig();
-    // Call the UniprotConfig() constructor after properties filename has
-    // been read from project.xml
     private static UniprotConfig CONFIG = null;
     private static final Logger LOG = Logger.getLogger(UniprotConverter.class);
     private Map<String, String> pubs = new HashMap<String, String>();
@@ -110,7 +111,7 @@ public class UniprotConverter extends BioDirectoryConverter
         CONFIG = new UniprotConfig(configFile);
         if (taxonIds != null) {
             addSubspecies();
-        }   
+        }
     }
 
     /**
@@ -453,7 +454,7 @@ public class UniprotConverter extends BioDirectoryConverter
                 entry.addDbref(getAttrValue(attrs, "type"), getAttrValue(attrs, "id"));
             } else if ("property".equals(qName) && "dbReference".equals(previousQName)) {
                 String type = getAttrValue(attrs, "type");
-                String geneDesignation = CONFIG.getGeneDesignation(entry.getTaxonId());
+                String geneDesignation = getGeneDesignation(entry.getTaxonId());
                 if (type.equals(geneDesignation)) {
                     entry.addGeneDesignation(getAttrValue(attrs, "value"));
                 } else if ("evidence".equals(type)) {
@@ -1220,6 +1221,15 @@ public class UniprotConverter extends BioDirectoryConverter
             return geneFields;
         }
 
+        // which gene-designation for this organism, if applicable
+        private String getGeneDesignation(String taxId) {
+            String geneDesignation = CONFIG.getGeneDesignation(taxId);
+            if (geneDesignation == null) {
+                geneDesignation = CONFIG.getGeneDesignation("default");
+            }
+            return geneDesignation;
+        }
+
         private String resolveGene(String taxId, String identifier) {
             if (FLY.equals(taxId)) {
                 return resolveFlyGene(taxId, identifier);
@@ -1318,15 +1328,14 @@ public class UniprotConverter extends BioDirectoryConverter
 
     private String getGOEvidenceCode(String value)
         throws SAXException {
-        String code = "";
         String refId;
+
         if (value.startsWith("ECO:")) {
             // value is an ECO ontology term
-            code = value;
             refId = goEvidenceCodes.get(value);
             if (refId == null) {
                 Item item = createItem("GOEvidenceCode");
-                item.setAttribute("code", code);
+                item.setAttribute("code", value);
                 item.setAttribute("source", EVIDENCE_ONTOLOGY);
                 item.setReference("evidenceOntology", getECOTerm(value));
                 refId = item.getIdentifier();
@@ -1340,6 +1349,7 @@ public class UniprotConverter extends BioDirectoryConverter
         } else {
             // value is a GO Evidence Code
             String[] bits = value.split(":");
+            String code = "";
             if (bits == null) {
                 code = value;
             } else {

@@ -1,7 +1,7 @@
 package org.intermine.api.searchengine.solr;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -519,8 +519,10 @@ public class SolrObjectHandler extends Thread
                         continue;
                     }
                     // only index strings and integers
-                    if ("java.lang.String".equals(att.getType())
-                            || "java.lang.Integer".equals(att.getType())) {
+                    // Modification: don't even include integers - excludes id, start, end, length fields
+                    //if ("java.lang.String".equals(att.getType())
+                    //        || "java.lang.Integer".equals(att.getType())) {
+                    if ("java.lang.String".equals(att.getType())) {
                         Object value = obj.getFieldValue(att.getName());
 
                         // ignore null values

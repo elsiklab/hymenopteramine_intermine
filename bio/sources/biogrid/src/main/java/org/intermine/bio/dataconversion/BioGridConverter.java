@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -62,7 +62,10 @@ import org.xml.sax.helpers.DefaultHandler;
  *  - dmel gene doesn't resolve
  *  - if any of the participants are invalid, we throw away the interaction
  *
+ * Modified from original to not use ID Resolver (except for fly, if applicable).
+ *
  * @author Julie Sullivan
+ * @author
  */
 public class BioGridConverter extends BioFileConverter
 {
@@ -107,6 +110,17 @@ public class BioGridConverter extends BioFileConverter
         PSI_TERMS.put("MI:0794", "genetic");
         PSI_TERMS.put("MI:0796", "genetic");
         PSI_TERMS.put("MI:0799", "genetic");
+        PSI_TERMS.put("MI:2368", "genetic");
+        PSI_TERMS.put("MI:2369", "genetic");
+        PSI_TERMS.put("MI:2370", "genetic");
+        PSI_TERMS.put("MI:2371", "genetic");
+        PSI_TERMS.put("MI:2372", "genetic");
+        PSI_TERMS.put("MI:2373", "genetic");
+        PSI_TERMS.put("MI:2374", "genetic");
+        PSI_TERMS.put("MI:2375", "genetic");
+        PSI_TERMS.put("MI:2376", "genetic");
+        PSI_TERMS.put("MI:2377", "genetic");
+        PSI_TERMS.put("MI:2378", "genetic");
     }
 
     /**
@@ -127,6 +141,7 @@ public class BioGridConverter extends BioFileConverter
 
         // Update to use ID Resolver only for fly
         if (rslv == null) {
+            //rslv = IdResolverService.getIdResolverByOrganism(taxonIds);
             rslv = IdResolverService.getFlyIdResolver();
         }
 
@@ -189,7 +204,8 @@ public class BioGridConverter extends BioFileConverter
                 config = new Config();
                 configs.put(taxonId, config);
             }
-            if ("xref".equals(attributes[1])) {
+            String attribute = attributes[1];
+            if ("xref".equals(attribute)) {
                 String attribute2 = attributes[2];
                 if (StringUtils.isNotEmpty(attribute2)) {
                     // e.g. primaryIdentifier
@@ -199,18 +215,17 @@ public class BioGridConverter extends BioFileConverter
                     //e.g. mgd/mgi
                     config.setXref(value.toLowerCase());
                 }
+            } else if ("alias".equals(attribute)) {
+                config.setAlias(value);
+            } else if ("strain".equals(attribute)) {
+                strains.put(value, taxonId);
+            } else if ("prefix".equals(attribute)) {
+                // e.g. MGI:
+                config.setPrefix(value);
             } else {
-                String attribute = attributes[1];
-                if ("strain".equals(attribute)) {
-                    strains.put(value, taxonId);
-                } else if ("prefix".equals(attribute)) {
-                    // e.g. MGI:
-                    config.setPrefix(value);
-                } else {
-                    // e.g. 9606.symbol = shortLabel
-                    config.setIdentifierName(attribute);
-                    config.setNameSource(value);
-                }
+                // e.g. 9606.symbol = shortLabel
+                config.setIdentifierName(attribute);
+                config.setNameSource(value);
             }
         }
     }
@@ -257,6 +272,7 @@ public class BioGridConverter extends BioFileConverter
         private String participantId = null;
         private Stack<String> stack = new Stack<String>();
         private String attName = null;
+        private String aliasType = null;
         private StringBuffer attValue = null;
 
         /**
@@ -315,7 +331,11 @@ public class BioGridConverter extends BioFileConverter
                     db = db.toLowerCase();
                     interactorHolder.xrefs.put(db, attrs.getValue("id"));
                 }
-
+            // <interactorList><interactor id="4">
+            // <names><alias type="systematic name">SPAC23G3.09</alias><names>
+            } else if ("alias".equals(qName) && stack.search("interactor") == 2) {
+                attName = "alias";
+                aliasType = attrs.getValue("type");
             // <interactorList><interactor id="4"><names><shortLabel>YFL039C</shortLabel>
             } else if ("shortLabel".equals(qName) && stack.search("interactor") == 2) {
                 attName = "shortLabel";
@@ -438,7 +458,11 @@ public class BioGridConverter extends BioFileConverter
                     shortLabel = shortLabel.trim();
                 }
                 interactorHolder.shortLabel = shortLabel;
-
+            // <interactorList><interactor id="4">
+            // <names><alias type="systematic name">SPAC23G3.09</alias><names>
+            } else if (attName != null && "alias".equals(attName)
+                    && "alias".equals(qName) && stack.search("interactor") == 2) {
+                interactorHolder.alias.put(aliasType, attValue.toString());
             /******************* INTERACTIONS ***************************************************/
             //<interactionList><interaction>   <participantList><participant id="68259">
             //<interactorRef>1</interactorRef>
@@ -609,6 +633,8 @@ public class BioGridConverter extends BioFileConverter
 
             if ("shortLabel".equalsIgnoreCase(config.getNameSource())) {
                 identifier = ih.shortLabel;
+            } else if (config.getAlias() != null && ih.alias.get(config.getAlias()) != null) {
+                identifier = ih.alias.get(config.getAlias());
             } else {
                 identifier = ih.xrefs.get(config.getIdentifierSource());
             }
@@ -621,6 +647,7 @@ public class BioGridConverter extends BioFileConverter
 
             String identifierField = config.getIdentifierName();
 
+            //if (rslv != null && rslv.hasTaxon(taxonId)) {
             if (FLY.equals(taxonId)) {
                 //identifier = resolveGene(taxonId, identifier);
                 identifier = resolveFlyGene(identifier);
@@ -880,6 +907,8 @@ public class BioGridConverter extends BioFileConverter
             protected Participant participant = null;
             // db to identifier, eg. FlyBase --> FBgn
             protected Map<String, String> xrefs = new HashMap<String, String>();
+            // alias type to value, eg. "systematic name" --> SPAC23G3.09
+            protected Map<String, String> alias = new HashMap<String, String>();
             // symbol
             protected String shortLabel;
             protected boolean valid = true;
@@ -1008,6 +1037,7 @@ public class BioGridConverter extends BioFileConverter
         private String taxonId;
         private String prefix;
         private String xref;
+        private String alias;
         private String identifierName = DEFAULT_IDENTIFIER_FIELD;
         private String nameSource;
 
@@ -1054,6 +1084,21 @@ public class BioGridConverter extends BioFileConverter
          */
         protected void setXref(String xref) {
             this.xref = xref;
+        }
+
+        /**
+          * @return the alias type to determine the identifier for the gene
+         */
+        public String getAlias() {
+            return alias;
+        }
+
+        /**
+         * @param alias the aliad type to use to determine the identifier for this gene,
+         * e.g. systematic name
+         */
+        public void setAlias(String alias) {
+            this.alias = alias;
         }
 
         /**

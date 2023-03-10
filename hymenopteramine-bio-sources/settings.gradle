@@ -1,17 +1,27 @@
 rootProject.name = 'bio-sources'
 include ':bio-source-evidence-ontology'
 project(':bio-source-evidence-ontology').projectDir = new File(settingsDir, './evidence-ontology')
-include ':bio-source-hao'
-project(':bio-source-hao').projectDir = new File(settingsDir, './hao')
+include ':bio-source-hymenoptera-anatomy-ontology'
+project(':bio-source-hymenoptera-anatomy-ontology').projectDir = new File(settingsDir, './hymenoptera-anatomy-ontology')
+include ':bio-source-fasta-assembly'
+project(':bio-source-fasta-assembly').projectDir = new File(settingsDir, './fasta-assembly')
+include ':bio-source-refseq-gff'
+project(':bio-source-refseq-gff').projectDir = new File(settingsDir, './refseq-gff')
+include ':bio-source-pseudogene-refseq-gff'
+project(':bio-source-pseudogene-refseq-gff').projectDir = new File(settingsDir, './pseudogene-refseq-gff')
+include ':bio-source-pseudogene-refseq-nottranscribed-gff'
+project(':bio-source-pseudogene-refseq-nottranscribed-gff').projectDir = new File(settingsDir, './pseudogene-refseq-nottranscribed-gff')
+include ':bio-source-ensembl-gff'
+project(':bio-source-ensembl-gff').projectDir = new File(settingsDir, './ensembl-gff')
+include ':bio-source-pseudogene-ensembl-gff'
+project(':bio-source-pseudogene-ensembl-gff').projectDir = new File(settingsDir, './pseudogene-ensembl-gff')
 include ':bio-source-ogs-gff'
 project(':bio-source-ogs-gff').projectDir = new File(settingsDir, './ogs-gff')
-include ':bio-source-refseq-proteincoding-gff'
-project(':bio-source-refseq-proteincoding-gff').projectDir = new File(settingsDir, './refseq-proteincoding-gff')
-include ':bio-source-refseq-noncoding-gff'
-project(':bio-source-refseq-noncoding-gff').projectDir = new File(settingsDir, './refseq-noncoding-gff')
-include ':bio-source-kegg-metadata'
-project(':bio-source-kegg-metadata').projectDir = new File(settingsDir, './kegg-metadata')
-include ':bio-source-aliases'
-project(':bio-source-aliases').projectDir = new File(settingsDir, './aliases')
 include ':bio-source-cross-references'
 project(':bio-source-cross-references').projectDir = new File(settingsDir, './cross-references')
+include ':bio-source-aliases'
+project(':bio-source-aliases').projectDir = new File(settingsDir, './aliases')
+include ':bio-source-reciprocal-best-hits'
+project(':bio-source-reciprocal-best-hits').projectDir = new File(settingsDir, './reciprocal-best-hits')
+include ':bio-source-orthodb-clusters'
+project(':bio-source-orthodb-clusters').projectDir = new File(settingsDir, './orthodb-clusters')

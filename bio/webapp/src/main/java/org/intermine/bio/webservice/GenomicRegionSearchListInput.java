@@ -1,7 +1,7 @@
 package org.intermine.bio.webservice;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -78,6 +78,9 @@ public class GenomicRegionSearchListInput extends ListInput
         JSONObject jsonRequest = new JSONObject(input);
         GenomicRegionSearchInfo parsed = new GenomicRegionSearchInfo();
         parsed.setOrganism(jsonRequest.getString("organism"));
+        if (!jsonRequest.isNull("assembly")) {
+            parsed.setChrAssembly(jsonRequest.getString("assembly"));
+        }
         if (!jsonRequest.isNull("isInterbase")) {
             parsed.setInterbase(jsonRequest.getBoolean("isInterbase"));
         }
@@ -132,6 +135,7 @@ public class GenomicRegionSearchListInput extends ListInput
 
         private final String sequenceFeature = "org.intermine.model.bio.SequenceFeature";
         private String organism;
+        private String chrAssembly;
         private Set<String> featureTypes;
         private Set<ClassDescriptor> featureCds;
         private List<String> regions;
@@ -139,6 +143,17 @@ public class GenomicRegionSearchListInput extends ListInput
         private boolean isInterbase = false;
         private Set<String> invalidSpans = new HashSet<String>();
         private boolean strandSpecific;
+
+        public String toString() {
+            String retStr = "Org: " + organism;
+            retStr += "Feature types: ";
+            retStr += featureTypes;
+            retStr += ", Regions: ";
+            retStr += regions;
+            retStr += ", invalidSpans: ";
+            retStr += invalidSpans;
+            return retStr;
+        }
 
         /**
          *
@@ -161,6 +176,21 @@ public class GenomicRegionSearchListInput extends ListInput
          */
         public void setOrganism(String organism) {
             this.organism = organism;
+        }
+
+        /**
+         * @return assembly version
+         */
+        public String getChrAssembly() {
+            return chrAssembly;
+        }
+
+        /**
+         *
+         * @param chrAssembly assembly version
+         */
+        public void setChrAssembly(String chrAssembly) {
+            this.chrAssembly = chrAssembly;
         }
 
         /**
@@ -323,6 +353,7 @@ public class GenomicRegionSearchListInput extends ListInput
         public GenomicRegionSearchConstraint asSearchConstraint() {
             GenomicRegionSearchConstraint grsc = new GenomicRegionSearchConstraint();
             grsc.setOrgName(organism);
+            grsc.setChrAssembly(chrAssembly);
             grsc.setFeatureTypes(getFeatureClasses());
             grsc.setGenomicRegionList(getGenomicRegions());
             grsc.setExtendedRegionSize(extension);

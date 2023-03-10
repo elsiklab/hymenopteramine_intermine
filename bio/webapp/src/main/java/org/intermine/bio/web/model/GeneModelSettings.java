@@ -1,7 +1,7 @@
 package org.intermine.bio.web.model;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -13,6 +13,7 @@ package org.intermine.bio.web.model;
 /**
  *
  * @author Fenyuan
+ * @author
  */
 public class GeneModelSettings
 {
@@ -23,7 +24,7 @@ public class GeneModelSettings
     boolean hasFivePrimeUTRs = true;
     boolean hasExons = true;
     boolean hasIntrons = true;
-    boolean hasCDSs = true;
+    boolean hasCodingSequences = true;
 
     /**
      * @param organism organism
@@ -85,8 +86,8 @@ public class GeneModelSettings
     /**
      * @return true if has CDS
      */
-    public boolean getHasCDSs() {
-        return hasCDSs;
+    public boolean getHasCodingSequences() {
+        return hasCodingSequences;
     }
 
 }

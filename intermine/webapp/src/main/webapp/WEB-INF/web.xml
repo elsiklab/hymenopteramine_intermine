@@ -128,6 +128,7 @@
             <format accept="application/json;type=count" key="results">jsoncount</format>
             <format accept="application/xml">xml</format>
             <format accept="text/html">html</format>
+            <format accept="application/rdf+xml">rdf+xml</format>
         </returns>
     </method>
   </metadata>
@@ -1565,6 +1566,12 @@ to will also be returned.
                 description="The name of the list to investigate"
                 default="{name}">list</param>
             <param type="String"
+                required="false"
+                description="Comma-separated list of InterMine object IDs, optional unless list name is NULL.">ids</param>
+			<param type="String"
+                required="false"
+                description="Type of the entities, required when ids is used">type</param>
+            <param type="String"
                 required="true"
                 description="The name of the graphical widget to display"
                 options="/widgets|widgets{widgetType=chart}"
@@ -1604,6 +1611,9 @@ to will also be returned.
                 options="/lists|lists{status=CURRENT}"
                 default="{name}"
                 description="The name of the list to use as the population for the graph">list</param>
+            <param type="String"
+                required="false"
+                description="Comma-separated list of InterMine object IDs, optional unless list name is NULL.">ids</param>
             <param type="String" required="true" description="The name of the graphical widget to display">widget</param>
             <returns>
               <format key="results">json</format>
@@ -3347,12 +3357,16 @@ The different token types are:
         <method type="GET" authenticationRequired="false">
             <summary>Get permanent URL for data objetct</summary>
             <description>
-                This service generates permanent URL based on the internal intermine ID
+                This service generates permanent URL based on the internal intermine ID. If the type=rdf, it returns the link to the rdf representation of the entity 
             </description>
             <param
                 required="true"
                 type="String"
                 description="The internal InterMine ID">id</param>
+            <param
+                required="false"
+                type="String"
+                description="The type of the url">type</param>
             <returns>
                 <format accept="application/json">json</format>
             </returns>
@@ -3452,6 +3466,497 @@ The different token types are:
     </metadata>
   </servlet-mapping>
 
+<!-- new in version 32 -->
+  <servlet>
+    <servlet-name>ws-feedback</servlet-name>
+    <servlet-class>org.intermine.webservice.server.FeedbackServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-feedback</servlet-name>
+    <url-pattern>/service/feedback/*</url-pattern>
+    <metadata>
+        <name>Feedback</name>
+        <minVersion>32</minVersion>
+        <method type="POST" authenticationRequired="false">
+            <summary>Send feedback</summary>
+            <description>
+                This service allows users to send feedback
+            </description>
+            <param
+                required="false"
+                type="Email"
+                description="The user email">email</param>
+            <param
+                description="The feedback"
+                required="true"
+                type="String">feedback</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ws-request-psw-reset</servlet-name>
+    <servlet-class>org.intermine.webservice.server.user.RequestPswResetServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-request-psw-reset</servlet-name>
+    <url-pattern>/service/user/requestpswreset</url-pattern>
+    <metadata>
+        <name>Request Password Reset</name>
+        <minVersion>32</minVersion>
+        <method type="GET" authenticationRequired="false">
+            <summary>Send a password change email with token</summary>
+            <description>
+                This service sends a password change email to the user email address
+            </description>
+            <param
+                required="false"
+                type="Email"
+                description="The user email">email</param>
+            <param
+                description="The url where the user is redicted to change the password"
+                required="true"
+                type="String">redirectUrl</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ws-psw-reset</servlet-name>
+    <servlet-class>org.intermine.webservice.server.user.PswResetServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-psw-reset</servlet-name>
+    <url-pattern>/service/user/pswreset</url-pattern>
+    <metadata>
+        <name>Password Reset</name>
+        <minVersion>32</minVersion>
+        <method type="PUT" authenticationRequired="false">
+            <summary>Reset a password</summary>
+            <description>
+                This service changes a user's password with the authority of a token previously emailed
+            </description>
+            <param
+                required="true"
+                type="String"
+                description="The token previously emailed">pswResetToken</param>
+            <param required="true"
+		   type="String" 
+                   description="The new password">newPassword</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ws-bg-properties</servlet-name>
+    <servlet-class>org.intermine.webservice.server.bg.BGPropertiesServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-bg-properties</servlet-name>
+    <url-pattern>/service/bluegenes-properties</url-pattern>
+    <metadata>
+        <name>BlueGenes Properies</name>
+        <minVersion>32</minVersion>
+        <method type="GET" authenticationRequired="false">
+            <summary> Get value of key, or all key-values if key is not specified</summary>
+            <description>
+                This service returns the value of key, or all key-values if not specified
+            </description>
+            <param
+                required="false"
+                type="String"
+                description="The key">key</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+        <method type="POST" authenticationRequired="true">
+            <summary>Add new key with value</summary>
+            <description>
+                This service adds a new key with value
+            </description>
+            <param
+                required="true"
+                type="String"
+                description="The key">key</param>
+            <param required="true"
+		   type="String" 
+                   description="The value">value</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+        <method type="PUT" authenticationRequired="true">
+            <summary>Update value of existing key</summary>
+            <description>
+                This service updates the value of existing key
+            </description>
+            <param
+                required="true"
+                type="String"
+                description="The key">key</param>
+            <param required="true"
+		   type="String" 
+                   description="The new value">value</param>
+            <body description="The key and value, if using body content.">
+                <content type="application/x-www-form-urlencoded"/>
+            </body>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+        <method type="DELETE" authenticationRequired="true">
+            <summary>Remove existing key</summary>
+            <description>
+                This service removes existing key
+            </description>
+            <param
+                required="true"
+                type="String"
+                description="The key">key</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+   <servlet>
+     <servlet-name>ws-list-resolver</servlet-name>
+     <servlet-class>org.intermine.webservice.server.idresolution.ListResolutionServlet</servlet-class>
+   </servlet>
+
+   <servlet-mapping>
+     <servlet-name>ws-list-resolver</servlet-name>
+     <url-pattern>/service/listresolver/*</url-pattern>
+      <metadata>
+        <name>List Resolution</name>
+        <minVersion>32</minVersion>
+        <method type="POST" authenticationRequired="true">
+          <name>Submit a List Upgrading Job</name>
+          <summary>Start a new List Resolution Job on the Server</summary>
+          <description format="markdown">
+List Resolution job checks that all the identifiers in the given list are still valid. Jobs are run asynchronously, so this service simply submits the
+job, and returns the identifier of the job, so that its results and status
+may be polled later.
+          </description>
+          <param type="String" required="true" description="The name of the list which will be checked by the job">name</param>
+          <returns>
+             <format key="uid">json</format>
+          </returns>
+        </method>
+        <method type="GET" authenticationRequired="true" slug="/:uid/status">
+            <name>Check Job Status</name>
+            <summary>Check the Status of a Given Job</summary>
+            <description>Get a representation of the status of job.</description>
+            <param type="String" required="true" description="The unique identifier of the job">uid</param>
+            <returns>
+              <format key="status" accept="application/json">json</format>
+            </returns>
+        </method>
+        <method type="GET" authenticationRequired="true" slug="/:uid/results">
+            <name>Retrieve Job Results</name>
+            <summary>Get the Results of a Given Job</summary>
+            <description>Get the full results of running a specific job.</description>
+            <param type="String" required="true" description="The unique identifier of the job">uid</param>
+            <returns>
+              <format key="results" accept="application/json">json</format>
+            </returns>
+        </method>
+        <method type="DELETE" authenticationRequired="true" slug="/:uid">
+            <name>Delete A Job</name>
+            <summary>Delete a given job from the server.</summary>
+            <description>Each job should be removed from the server when the user has finished inspecting the results.</description>
+            <param type="String" required="true" description="The unique identifier of the job">uid</param>
+            <returns>
+              <format accept="application/json">json</format>
+            </returns>
+        </method>
+      </metadata>
+   </servlet-mapping>
+
+  <servlet>
+  <servlet-name>ws-upgrade-list</servlet-name>
+  <servlet-class>org.intermine.webservice.server.lists.ListUpgradingServlet</servlet-class>
+  <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+  </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-upgrade-list</servlet-name>
+    <url-pattern>/service/upgradelist/*</url-pattern>
+    <metadata>
+        <name>Upgrade List</name>
+        <minVersion>32</minVersion>
+        <method type="GET" authenticationRequired="false" ALSO="POST">
+          <summary>Upgrade a list with conflicts after a new build</summary>
+            <description>
+              This service allows to upgrade an existing list in order to resolve any conflicts after a new build.
+            </description>
+            <param required="true"
+                  type="String"
+                  description="The name of the list which will be upgraded">name</param>
+          <body description="Internal IDS which will be used to upgrade the list, tab, comma or newline separated.">
+             <content type="text/plain"/>
+          </body>
+          <returns>
+            <format accept="application/json">json</format>
+            <format accept="text/plain">text</format>
+          </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ws-oauth2-authenticator</servlet-name>
+    <servlet-class>org.intermine.webservice.server.oauth2.AuthenticatorServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-oauth2-authenticator</servlet-name>
+    <url-pattern>/service/oauth2authenticator</url-pattern>
+    <metadata>
+        <name>OAuth2 Authenticator</name>
+        <minVersion>32</minVersion>
+        <method type="GET" authenticationRequired="false">
+            <summary>OAuth2 Authenticator</summary>
+            <description>
+                This service redirects the user to the oauth2 authenticator provider
+            </description>
+	        <param
+                required="true"
+                type="String"
+                description="The provider used for the authentication, e.g. GOOGLE, IM">provider</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ws-oauth2-callback</servlet-name>
+    <servlet-class>org.intermine.webservice.server.oauth2.CallbackServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-oauth2-callback</servlet-name>
+    <url-pattern>/service/oauth2callback/*</url-pattern>
+    <metadata>
+        <name>OAuth2 Callback</name>
+        <minVersion>32</minVersion>
+        <method type="GET" authenticationRequired="false">
+            <summary>OAuth2 Callback</summary>
+            <description>
+                This service is called by the oauth2 authenticator provider after the user logs in
+            </description>
+            <param
+                required="true"
+                type="String"
+                description="The provider used for the authentication, e.g. GOOGLE, IM">provider</param>
+            <param
+                required="true"
+                type="String"
+                description="The client uri where the user is redirected after authentication">redirect_uri</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <!-- new in version 33 -->
+  <servlet>
+    <servlet-name>ws-precompute-template</servlet-name>
+    <servlet-class>org.intermine.webservice.server.template.TemplatePrecomputeServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-precompute-template</servlet-name>
+    <url-pattern>/service/template/precompute</url-pattern>
+    <metadata>
+        <name>Precompute</name>
+        <minVersion>33</minVersion>
+        <method type="GET" authenticationRequired="true">
+            <summary>Template Precomputed or not</summary>
+            <description>
+                This service tells if a template has been already precomputed
+            </description>
+			<param
+                required="false"
+                type="String"
+                description="The name of the template">name</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+        <method type="POST" authenticationRequired="true">
+            <summary>Precompute a template</summary>
+            <description>
+                This service allow to precompute a template
+            </description>
+			<param
+                required="true"
+                type="String"
+                description="The name of the template">name</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ws-summarise-template</servlet-name>
+    <servlet-class>org.intermine.webservice.server.template.TemplateSummariseServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ws-summarise-template</servlet-name>
+    <url-pattern>/service/template/summarise</url-pattern>
+    <metadata>
+        <name>Summarise</name>
+        <minVersion>33</minVersion>
+        <method type="GET" authenticationRequired="true">
+            <summary>Template summarised or not</summary>
+            <description>
+                This service tells if a template has been already summarised
+            </description>
+			<param
+                required="false"
+                type="String"
+                description="The name of the template">name</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+        <method type="POST" authenticationRequired="true">
+            <summary>Summarise a template</summary>
+            <description>
+                This service allow to Summarise a template
+            </description>
+			<param
+                required="true"
+                type="String"
+                description="The name of the template">name</param>
+            <returns>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <!-- new in version 34 -->
+  <servlet>
+    <servlet-name>ws-all-templates</servlet-name>
+    <servlet-class>org.intermine.webservice.server.core.RestfulServlet</servlet-class>
+    <init-param>
+       <param-name>GET</param-name>
+       <param-value>org.intermine.webservice.server.template.AllAvailableTemplatesService</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-all-templates</servlet-name>
+    <url-pattern>/service/alltemplates</url-pattern>
+    <metadata>
+        <name>All templates</name>
+        <minVersion>34</minVersion>
+        <method type="GET" authenticationRequired="true">
+            <summary>All templates created by users</summary>
+            <description>
+                Get a listing of all templates configured in an InterMine instance by any user. Only admin users can access it
+            </description>
+            <returns>
+                <format>xml</format>
+                <format accept="application/json">json</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
+  <!-- new in version 35 -->
+  <servlet>
+    <servlet-name>ws-entity-representation</servlet-name>
+    <servlet-class>org.intermine.webservice.server.entity.EntityRepresentationServlet</servlet-class>
+    <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ws-entity-representation</servlet-name>
+    <url-pattern>/service/entity-representation/*</url-pattern>
+    <metadata>
+        <name>Entity Representation</name>
+        <minVersion>35</minVersion>
+        <method type="GET" authenticationRequired="false">
+            <summary>Entity Representation</summary>
+            <description>
+                This service return the representation of a entity
+            </description>
+            <param
+                required="true"
+                type="String"
+                description="The Local Unique Identifier of the entity">lui</param>
+            <param
+                required="true"
+                type="String"
+                description="The type of the representation. Only RDF is supported">format</param>
+            <returns>
+                <format accept="application/rdf+xml">rdf+xml</format>
+            </returns>
+        </method>
+    </metadata>
+  </servlet-mapping>
+
   <!-- MUST BE LISTED LAST OF ALL WEBSERVICES AS IT IS THE MOST GENERAL -->
   <servlet-mapping>
     <servlet-name>ws-service-listing</servlet-name>
@@ -3476,7 +3981,7 @@ The different token types are:
 <!-- ================================================================================= -->
 
   <session-config>
-    <session-timeout>1440</session-timeout>      <!-- 1440 = 24 * 60 = 1 day -->
+    <session-timeout>60</session-timeout>      <!-- Changed from 1 day to 1 hour -->  
   </session-config>
 
   <welcome-file-list>
@@ -3491,6 +3996,17 @@ The different token types are:
   <filter-mapping>
       <filter-name>PermanentURLFilter</filter-name>
       <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <filter>
+    <filter-name>EntityRepresentation</filter-name>
+    <filter-class>org.intermine.web.filters.EntityRepresentationFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>EntityRepresentation</filter-name>
+    <url-pattern>*.rdf</url-pattern>
   </filter-mapping>
 
   <!-- Interpret POST parameters as UTF-8 by default -->

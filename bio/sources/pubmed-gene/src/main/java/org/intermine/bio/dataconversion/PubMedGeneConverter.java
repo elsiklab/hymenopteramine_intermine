@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -28,8 +28,10 @@ import org.intermine.xml.full.Item;
 
 /**
  * DataConverter creating items from PubMed data file
+ * Modified from original to load Gene.source and not use ID resolver.
  *
  * @author Jakub Kulaviak
+ * @author
  */
 public class PubMedGeneConverter extends BioFileConverter
 {
@@ -38,6 +40,7 @@ public class PubMedGeneConverter extends BioFileConverter
     private Map<String, String> publications = new HashMap<String, String>();
     protected IdResolver rslv;
     private Map<String, Item> genes = new HashMap<String, Item>();
+    private String geneSource = null;
     private static final String FLY = "7227";
 
     /**
@@ -47,6 +50,15 @@ public class PubMedGeneConverter extends BioFileConverter
      */
     public PubMedGeneConverter(ItemWriter writer, Model model) throws ObjectStoreException {
         super(writer, model, "NCBI", "PubMed to gene mapping");
+    }
+
+    /**
+     * Sets the gene source for all genes created
+     * @param geneSource gene source
+     */
+    public void setGeneSource(String geneSource) {
+        System.out.println("Setting gene source to " + geneSource);
+        this.geneSource = geneSource;
     }
 
     /**
@@ -67,10 +79,12 @@ public class PubMedGeneConverter extends BioFileConverter
     public void process(Reader reader)
         throws Exception {
 
+        if (StringUtils.isEmpty(geneSource)) {
+            throw new RuntimeException("Gene source not set in project.xml");
+        }
+
         if (rslv == null) {
-            //rslv = IdResolverService.getIdResolverByOrganism(taxonIds);
-            // Update to only use fly ID resolver
-            rslv = IdResolverService.getFlyIdResolver();
+            rslv = IdResolverService.getIdResolverByOrganism(taxonIds);
         }
 
         Iterator it = FormattedTextParser.parseTabDelimitedReader(reader);
@@ -81,8 +95,9 @@ public class PubMedGeneConverter extends BioFileConverter
                 continue;
             }
 
-            String originalTaxonId = line[0];
-            String taxonId = replaceSubspecies(originalTaxonId);
+            //String originalTaxonId = line[0];
+            //String taxonId = replaceSubspecies(originalTaxonId);
+            String taxonId = line[0];
             String geneId = line[1];
             String pubmedId = line[2];
 
@@ -131,8 +146,9 @@ public class PubMedGeneConverter extends BioFileConverter
 
     private Item getGene(String identifier, String taxonId) {
         String resolvedIdentifier = identifier;
+        // Use ID resolver for fly genes only
         if (FLY.equals(taxonId)) {
-            resolvedIdentifier = resolveFlyGene(identifier);
+            resolvedIdentifier = resolveGene(taxonId, identifier);
         }
         if (resolvedIdentifier == null) {
             return null;
@@ -141,23 +157,23 @@ public class PubMedGeneConverter extends BioFileConverter
         if (gene == null) {
             gene = createItem("Gene");
             gene.setAttribute("primaryIdentifier", resolvedIdentifier);
+            gene.setAttribute("source", geneSource);
             gene.setReference("organism", getOrganism(taxonId));
             genes.put(resolvedIdentifier, gene);
         }
         return gene;
     }
 
-    // Use resolver for fly genes only
-    private String resolveFlyGene(String identifier) {
-        if (rslv == null || !rslv.hasTaxon(FLY)) {
+    private String resolveGene(String taxonId, String identifier) {
+        if (rslv == null || !rslv.hasTaxon(taxonId)) {
             return identifier;
         }
-        int resCount = rslv.countResolutions(FLY, identifier);
+        int resCount = rslv.countResolutions(taxonId, identifier);
 
         if (resCount != 1) {
             LOG.warn("Skipping gene, could not resolve identifier: " + identifier);
             return null;
         }
-        return rslv.resolveId(FLY, identifier).iterator().next();
+        return rslv.resolveId(taxonId, identifier).iterator().next();
     }
 }

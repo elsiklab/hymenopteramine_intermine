@@ -1,7 +1,7 @@
 package org.intermine.web.struts;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Cookie;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
@@ -132,13 +133,15 @@ public class HtmlHeadController extends TilesAction
 
                 ReportObject reportObject = reportObjects.get(object);
                 markupReportPage(request, reportObject);
+                //can be added later
+                //request.setAttribute("lui", reportObject.getLUI());
                 htmlPageTitle = reportObject.getHtmlHeadTitle();
 
             } catch (Exception e) {
                 LOG.warn("Could not correctly set the page title for object ID - " + objectId, e);
             }
         }
-        request.setAttribute("htmlPageTitle", htmlPageTitle);
+        request.setAttribute("htmlPageTitle", StringEscapeUtils.escapeHtml(htmlPageTitle));
 
         // Can we employ user tracking?
         String userTrackingMessage = (String) SessionMethods.getWebProperties(
@@ -179,9 +182,13 @@ public class HtmlHeadController extends TilesAction
      * @param reportObject the reportObject
      */
     private void markupReportPage(HttpServletRequest request, ReportObject reportObject) {
-        String semanticMarkup = reportObject.getSemanticMarkup(request);
-        if (semanticMarkup != null) {
-            request.setAttribute("semanticMarkup", reportObject.getSemanticMarkup(request));
+        try {
+            String semanticMarkup = reportObject.getSemanticMarkup(request);
+            if (semanticMarkup != null) {
+                request.setAttribute("semanticMarkup", semanticMarkup);
+            }
+        } catch (RuntimeException ex) {
+            //we do no want to break the page
         }
     }
 }

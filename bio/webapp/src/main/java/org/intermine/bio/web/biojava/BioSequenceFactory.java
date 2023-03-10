@@ -1,7 +1,7 @@
 package org.intermine.bio.web.biojava;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -16,6 +16,7 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.RNASequence;
 import org.biojava.nbio.core.sequence.compound.AmbiguityDNACompoundSet;
 import org.intermine.model.bio.BioEntity;
+import org.intermine.model.bio.Polypeptide;
 import org.intermine.model.bio.Protein;
 import org.intermine.model.bio.SequenceFeature;
 
@@ -65,7 +66,12 @@ public abstract class BioSequenceFactory
             return null;
         } else {
             String residues = feature.getSequence().getResidues().toString().toLowerCase();
-            return new BioSequence(new DNASequence(residues), feature);
+            // Update to handle Polypeptides
+            if (feature instanceof Polypeptide) {
+                return new BioSequence(new ProteinSequence(residues), feature);
+            } else {
+                return new BioSequence(new DNASequence(residues), feature);
+            }
         }
     }
 

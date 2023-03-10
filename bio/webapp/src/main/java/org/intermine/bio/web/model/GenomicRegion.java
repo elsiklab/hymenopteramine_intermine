@@ -1,7 +1,7 @@
 package org.intermine.bio.web.model;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -26,7 +26,7 @@ public class GenomicRegion implements Comparable<GenomicRegion>
     private Integer extendedStart;
     private Integer extendedEnd;
 
-    private Boolean minusStrand;    // for strand-specific matching
+    private Boolean minusStrand;       // for strand-specific matching
 
     //user identifier to tag the order of input e.g. X:7880589..7880644:5 is the 5th input
     private Integer tag = null;

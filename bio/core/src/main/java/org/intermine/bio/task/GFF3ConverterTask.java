@@ -1,7 +1,7 @@
 package org.intermine.bio.task;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -24,6 +24,7 @@ import org.intermine.dataconversion.ItemWriter;
 import org.intermine.dataconversion.ObjectStoreItemWriter;
 import org.intermine.metadata.Model;
 
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
@@ -42,7 +43,7 @@ public class GFF3ConverterTask extends Task
     protected static final Logger LOG = Logger.getLogger(GFF3ConverterTask.class);
 
     protected FileSet fileSet;
-    protected String converter, targetAlias, seqClsName, orgTaxonId;
+    protected String converter, targetAlias, seqClsName, orgTaxonId, seqAssemblyVersion;
     protected String seqDataSourceName, model, handlerClassName;
     protected GFF3Parser parser;
 
@@ -52,6 +53,8 @@ public class GFF3ConverterTask extends Task
     private String seqHandlerClassName;
 
     private boolean dontCreateLocations = false;
+    private boolean loadDuplicateEntities = false;
+    private boolean loadSequenceAlterations = false;
 
      /**
      * Set the data fileset
@@ -69,6 +72,7 @@ public class GFF3ConverterTask extends Task
         this.converter = converter;
     }
 
+
     /**
      * Set the target ObjectStore alias
      * @param targetAlias the targetAlias
@@ -77,7 +81,8 @@ public class GFF3ConverterTask extends Task
         this.targetAlias = targetAlias;
     }
 
-    /**
+
+     /**
      * Set the sequenceClassName
      * @param seqClsName the seqClsName;
      */
@@ -85,12 +90,45 @@ public class GFF3ConverterTask extends Task
         this.seqClsName = seqClsName;
     }
 
+
     /**
      * Set the organism taxon id
      * @param orgTaxonId the organism taxon id
      */
     public void setOrgTaxonId(String orgTaxonId) {
         this.orgTaxonId = orgTaxonId;
+    }
+
+    /**
+     * Set the assembly version
+     * @param seqAssemblyVersion the assembly version
+     */
+    public void setSeqAssemblyVersion(String seqAssemblyVersion) {
+        this.seqAssemblyVersion = seqAssemblyVersion;
+    }
+
+    /**
+     * Set whether to create Duplicate Entity items
+     * @param loadDuplicateEntities whether to load duplicate entities
+     */
+    public void setLoadDuplicateEntities(String loadDuplicateEntities) {
+        if ("true".equalsIgnoreCase(loadDuplicateEntities)) {
+            this.loadDuplicateEntities = true;
+        } else {
+            this.loadDuplicateEntities = false;
+        }
+    }
+
+    /**
+     * Set whether to load Sequence Alterations as flank markers
+     * @param loadSequenceAlterations whether to load Sequence Alterations
+     */
+    public void setLoadSequenceAlterations(String loadSequenceAlterations) {
+        if ("true".equalsIgnoreCase(loadSequenceAlterations)) {
+            this.loadSequenceAlterations = true;
+        } else {
+            this.loadSequenceAlterations = false;
+        }
     }
 
     /**
@@ -175,6 +213,9 @@ public class GFF3ConverterTask extends Task
         if (seqClsName == null) {
             throw new BuildException("seqClsName attribute not set");
         }
+        if (seqAssemblyVersion == null) {
+            throw new BuildException("seqAssemblyVersion attribute not set");
+        }
         if (orgTaxonId == null) {
             throw new BuildException("orgTaxonId attribute not set");
         }
@@ -233,34 +274,23 @@ public class GFF3ConverterTask extends Task
             if (files.length == 0) {
                 throw new BuildException("No GFF files found in: " + fileSet.getDir(getProject()));
             }
-            // Get assembly version from subdirectory name
-            // Kind of hacky but doesn't seem to work to set from project.xml in new version
-            String assemblyVersion = null;
-            String[] subDirs = ds.getBasedir().toString().split("/");
-            if (subDirs.length < 2) {
-                throw new BuildException("Unexpected data directory structure.");
-            }
-            String lastDir = subDirs[subDirs.length-1];
-            // Path is either ../annotation/<species_name>/<assembly>/ or
-            // ../annotation/<species_name>/<assembly>/proteincoding or
-            // ../annotation/<species_name>/<assembly>/noncoding
-            if ("proteincoding".equals(lastDir) || "noncoding".equals(lastDir)) {
-                assemblyVersion = subDirs[subDirs.length-2];
-            } else {
-                assemblyVersion = subDirs[subDirs.length-1];
-            }
-            System.out.println("Setting assembly version to " + assemblyVersion);
 
             GFF3Converter gff3converter =
-                new GFF3Converter(writer, seqClsName, assemblyVersion, orgTaxonId, dataSourceName,
+                new GFF3Converter(writer, seqClsName, seqAssemblyVersion, orgTaxonId, dataSourceName,
                                   dataSetTitle, tgtModel, recordHandler, sequenceHandler, licence);
             if (dontCreateLocations) {
                 gff3converter.setDontCreateLocations(dontCreateLocations);
             }
+            if (loadDuplicateEntities) {
+                gff3converter.setLoadDuplicateEntities(loadDuplicateEntities);
+            }
+            if (loadSequenceAlterations) {
+                gff3converter.setLoadSequenceAlterations(loadSequenceAlterations);
+            }
 
             for (int i = 0; i < files.length; i++) {
                 File f = new File(ds.getBasedir(), files[i]);
-                System.err.println("Processing file: " + f.getName());
+                System.err .println("Processing file: " + f.getName());
                 gff3converter.parse(new BufferedReader(new FileReader(f)));
             }
             gff3converter.storeAll();

@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -49,6 +49,7 @@ import org.intermine.xml.full.ReferenceList;
  * @author Peter Mclaren - some additions to record the parents of a go term.
  * @author Julie Sullivan - updated to handle GAF 2.0
  * @author Xavier Watkins - refactored model
+ * @author
  */
 public class GoConverter extends BioFileConverter
 {
@@ -81,13 +82,14 @@ public class GoConverter extends BioFileConverter
     protected String annotationClassName = "GOAnnotation";
     private static final String DEFAULT_ANNOTATION_TYPE = "gene";
     private static final String DEFAULT_IDENTIFIER_FIELD = "primaryIdentifier";
-    protected IdResolver rslv;
+    //protected IdResolver rslv;
     private static Config defaultConfig = null;
-    private String datasource, dataset, licence;
-    //private String datasetRefId = null;
+    private String datasource, dataset;
     private String datasourceRefId = null;
     private static final Logger LOG = Logger.getLogger(GoConverter.class);
     private static final String GO_ANNOTATION_NAME = "GO Annotation";
+    private static final String FIELD_EMPTY_SYMBOL = ".";
+    private boolean loadPublications = true;
 
     /**
      * Constructor
@@ -102,21 +104,11 @@ public class GoConverter extends BioFileConverter
                 DEFAULT_ANNOTATION_TYPE);
         readConfig();
         loadEvidenceCodes();
-        // Data set title will come from last column of .gaf file
-        //datasetRefId = setDefaultDataset();
-    }
-
-    /**
-     * Set the licence, a URL to the licence for this ontology
-     *
-     * @param licence licence for these data. Expects a URL
-     */
-    public void setLicence(String licence) {
-        this.licence = licence;
     }
 
     /**
      * Set the data set for this ontology
+     * (optional, will otherwise be set from source code)
      *
      * @param dataset data set for this ontology
      */
@@ -133,39 +125,20 @@ public class GoConverter extends BioFileConverter
         this.datasource = datasource;
     }
 
+    public void setLoadPublications(String loadPublications) {
+        System.out.println("Setting loadPublications to " + loadPublications);
+        if ("true".equalsIgnoreCase(loadPublications)) {
+            this.loadPublications = true;
+        } else {
+            this.loadPublications = false;
+        }
+    }
+
     private String setDefaultDatasource() throws ObjectStoreException {
         if (datasource == null) {
             datasource = GO_ANNOTATION_NAME;
         }
         return getDataSource(datasource);
-    }
-
-    private String setDefaultDataset() throws ObjectStoreException {
-        if (datasource == null) {
-            datasource = GO_ANNOTATION_NAME;
-        }
-
-        if (dataset == null) {
-            dataset = GO_ANNOTATION_NAME + " data set";
-        }
-
-        String datasourceRefId = getDataSource(datasource);
-
-        return getDataSet(dataset, datasourceRefId, licence);
-    }
-
-    private void storeDataset() throws ObjectStoreException {
-        if (datasource == null) {
-            datasource = GO_ANNOTATION_NAME;
-        }
-
-        if (dataset == null) {
-            dataset = GO_ANNOTATION_NAME + " data set";
-        }
-
-        String datasourceRefId = getDataSource(datasource);
-
-        getDataSet(dataset, datasourceRefId, licence);
     }
 
     static {
@@ -248,10 +221,11 @@ public class GoConverter extends BioFileConverter
      */
     @Override
     public void process(Reader reader) throws ObjectStoreException, IOException {
-        // Create id resolver
-        if (rslv == null) {
-            rslv = IdResolverService.getIdResolverForMOD();
-        }
+
+        // Create id resolver - not using
+        //if (rslv == null) {
+        //    rslv = IdResolverService.getIdResolverForMOD();
+        //}
 
         // Data source will come from project.xml
         datasourceRefId = setDefaultDatasource();
@@ -283,14 +257,15 @@ public class GoConverter extends BioFileConverter
             int readColumn = config.readColumn();
             String productId = array[readColumn];
 
-            String goId = array[4];
-            String qualifier = array[3];
-            String strEvidence = array[6];
-            String withText = array[7];
+            String goId = fieldValue(array[4]);
+            String qualifier = fieldValue(array[3]);
+            String strEvidence = fieldValue(array[6]);
+            String withText = fieldValue(array[7]);
             String annotationExtension = null;
             if (array.length >= 16) {
-                annotationExtension = array[15];
+                annotationExtension = fieldValue(array[15]);
             }
+
             if (StringUtils.isNotEmpty(strEvidence)) {
                 if (!evidenceCodes.containsKey(strEvidence)) {
                     throw new IllegalArgumentException("Evidence code is `" + strEvidence
@@ -308,23 +283,32 @@ public class GoConverter extends BioFileConverter
             // create unique key for go annotation
             GoTermToGene key = new GoTermToGene(productId, goId, qualifier, withText);
 
-            String code = array[14]; // e.g. GDB, where uniprot collect the data from
+            String code = fieldValue(array[14]); // e.g. GDB, where uniprot collect the data from
+            if (StringUtils.isEmpty(code)) {
+                throw new RuntimeException("code cannot be empty");
+            }
             String codeName = getDataSourceCodeName(code);
-            String dataSetTitle = GO_ANNOTATION_NAME + " from " + codeName;
+            // If data set not in project.xml, generate it from code name:
+            String dataSetTitle = StringUtils.isNotEmpty(dataset) ? dataset : GO_ANNOTATION_NAME + " from " + codeName;
+            //String dataSource = array[0]; // e.g. UniProtKB, where the goa file comes from
             Item organism = newOrganism(taxonId);
             String productIdentifier = newProduct(productId, type, organism, dataSetTitle, true, null);
 
             // null if resolver could not resolve an identifier
             if (productIdentifier != null) {
 
-                // null if no pub found
-                String pubRefId = newPublication(array[5]);
+                // null if no pub found or not loading pubs
+                String pubRefId = null;
+                if (loadPublications) {
+                    pubRefId = newPublication(array[5]);
+                }
 
                 // get evidence codes for this goterm|gene pair
                 Set<Evidence> allEvidenceForAnnotation = goTermGeneToEvidence.get(key);
 
                 // new evidence
-                if (allEvidenceForAnnotation == null || !StringUtils.isEmpty(withText)) {
+                //if (allEvidenceForAnnotation == null || !StringUtils.isEmpty(withText)) {
+                if (allEvidenceForAnnotation == null) {
                     String goTermIdentifier = newGoTerm(goId, dataSetTitle);
                     Evidence evidence = new Evidence(strEvidence, pubRefId, withText, organism,
                             dataSetTitle);
@@ -360,6 +344,17 @@ public class GoConverter extends BioFileConverter
         storeEvidence();
     }
 
+    // Check if field value empty
+    // converts empty symbol to empty string
+    private String fieldValue(String val) {
+        if (StringUtils.isNotEmpty(val) && !val.equals(FIELD_EMPTY_SYMBOL)) {
+            return val;
+        } else {
+            // Return empty string (not null - results in NullPointerException)
+            return "";
+        }
+    }
+
     /**
      * Reset maps that don't need to retain their contents between files.
      */
@@ -393,11 +388,12 @@ public class GoConverter extends BioFileConverter
                 // with objects
                 if (!StringUtils.isEmpty(evidence.withText)) {
                     goevidence.setAttribute("withText", evidence.withText);
-                    List<String> with = createWithObjects(evidence.withText, evidence.organism,
-                            evidence.dataSetTitle);
-                    if (!with.isEmpty()) {
-                        goevidence.addCollection(new ReferenceList("with", with));
-                    }
+                    // change made 12/6/22: don't actually create the entities from the with text
+                    //List<String> with = createWithObjects(evidence.withText, evidence.organism,
+                    //        evidence.dataSetTitle);
+                    //if (!with.isEmpty()) {
+                    //    goevidence.addCollection(new ReferenceList("with", with));
+                    //}
                 }
 
                 store(goevidence);
@@ -417,7 +413,6 @@ public class GoConverter extends BioFileConverter
         Item goAnnotation = createItem(annotationClassName);
         goAnnotation.setReference("subject", productIdentifier);
         goAnnotation.setReference("ontologyTerm", termIdentifier);
-        //goAnnotation.addToCollection("dataSets", datasetRefId);
         goAnnotation.addToCollection("dataSets", getDataSet(dataSetTitle, datasourceRefId));
 
         if (!StringUtils.isEmpty(qualifier)) {
@@ -485,7 +480,7 @@ public class GoConverter extends BioFileConverter
                                         dataSetTitle, true, "primaryIdentifier");
                             }
                         } else {
-                            productIdentifier = newProduct(value, className, organism, 
+                            productIdentifier = newProduct(value, className, organism,
                                     dataSetTitle, true, null);
                         }
                         if (productIdentifier != null) {
@@ -524,6 +519,7 @@ public class GoConverter extends BioFileConverter
                 }
             }
 
+            /* not using id resolver
             if (rslv != null && rslv.hasTaxon(taxonId)) {
                 if ("10116".equals(taxonId)) { // RGD doesn't have prefix in its annotation data
                     accession = "RGD:" + accession;
@@ -538,6 +534,7 @@ public class GoConverter extends BioFileConverter
                 }
                 accession = rslv.resolveId(taxonId, accession).iterator().next();
             }
+            */
         } else if ("protein".equalsIgnoreCase(type)) {
             // TODO use values in config
             clsName = "Protein";
@@ -577,8 +574,6 @@ public class GoConverter extends BioFileConverter
             product.setReference("organism", organism.getIdentifier());
         }
         product.setAttribute(idField, accession);
-
-        //product.addToCollection("dataSets", datasetRefId);
         product.addToCollection("dataSets", getDataSet(dataSetTitle, datasourceRefId));
 
         Integer storedProductId = store(product);
@@ -601,7 +596,7 @@ public class GoConverter extends BioFileConverter
                 ? organism.getIdentifier() : "");
     }
 
-    private String newGoTerm(String identifier, String dataSetTitle) 
+    private String newGoTerm(String identifier, String dataSetTitle)
             throws ObjectStoreException {
         if (identifier == null) {
             return null;
@@ -611,7 +606,6 @@ public class GoConverter extends BioFileConverter
         if (goTermIdentifier == null) {
             Item item = createItem(termClassName);
             item.setAttribute("identifier", identifier);
-            //item.addToCollection("dataSets", datasetRefId);
             item.addToCollection("dataSets", getDataSet(dataSetTitle, datasourceRefId));
             store(item);
 
@@ -642,8 +636,10 @@ public class GoConverter extends BioFileConverter
             title = "Gene Ontology";
         } else if ("PINC".equalsIgnoreCase(sourceCode)) {
             title = "Proteome Inc.";
-        } else if ("Pfam".equalsIgnoreCase(sourceCode)) {
-            title = "PFAM"; // to merge with interpro
+        //} else if ("Pfam".equalsIgnoreCase(sourceCode)) {
+        //    title = "PFAM"; // to merge with interpro
+        } else if ("maize-GAMER".equalsIgnoreCase(sourceCode)) {
+            title = "Maize-Gamer"; // added 11/22/19
         }
         return title;
     }
@@ -666,8 +662,8 @@ public class GoConverter extends BioFileConverter
 
                     }
                 }
-            } 
-            // Ignore if not a publication
+            }
+            // Ignore if not a publication 
             //else {
             //    xrefs.add(array[i]);
             //}
@@ -692,7 +688,6 @@ public class GoConverter extends BioFileConverter
         if (StringUtils.isEmpty(value)) {
             return null;
         }
-
         String sourceName = null;
         if (!dbRefs.contains(value)) {
             Item item = createItem("DatabaseReference");
@@ -762,6 +757,24 @@ public class GoConverter extends BioFileConverter
             if (publicationRefId != null) {
                 publicationRefIds.add(publicationRefId);
             }
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String toString() {
+            StringBuffer toStringBuff = new StringBuffer();
+
+            toStringBuff.append("Evidence: evidence code=");
+            toStringBuff.append(evidenceCode);
+            toStringBuff.append(", storedAnnotationId=");
+            toStringBuff.append(storedAnnotationId);
+            toStringBuff.append(", withText=");
+            toStringBuff.append(withText);
+            toStringBuff.append(", pubRefIds=");
+            toStringBuff.append(String.join(";", publicationRefIds));
+            return toStringBuff.toString();
         }
 
         protected List<String> getPublications() {

@@ -23,11 +23,6 @@
   </c:otherwise>
   </c:choose>
 
-  <p>
-    <img class="tinyQuestionMark" src="images/icons/information-small-blue.png" alt="?">
-    All Transcripts for Gene
-  </p>
-
   <c:choose>
     <c:when test="${!empty gene.transcripts}">
       <div class="switchers">
@@ -68,13 +63,13 @@
             <a href="#" id="threeprimeutrs" class="switcher">3' UTR</a>: ${count}&nbsp;
           </c:if>
         </c:if>
-        <c:if test="${settings.hasCDSs}">
+        <c:if test="${settings.hasCodingSequences}">
           <c:set var="count" value="0" />
           <c:forEach items="${geneModels}" var="geneModel">
-            <c:set var="count" value="${fn:length(geneModel.CDSs) + count}" />
+            <c:set var="count" value="${fn:length(geneModel.codingSequences) + count}" />
           </c:forEach>
           <c:if test="${count > 0}">
-            <a href="#" id="cdss" class="switcher">CDSs</a>: ${count}&nbsp;
+            <a href="#" id="cdss" class="switcher">Coding Sequences</a>: ${count}&nbsp;
           </c:if>
         </c:if>
       </div>
@@ -115,8 +110,8 @@
         <c:if test="${settings.hasThreePrimeUTRs}">
           <th>3' UTR</th>
         </c:if>
-        <c:if test="${settings.hasCDSs}">
-          <th>CDSs</th>
+        <c:if test="${settings.hasCodingSequences}">
+          <th>Coding Sequences</th>
         </c:if>
       </tr>
     </thead>
@@ -250,7 +245,7 @@
               </table>
             </td>
           </c:if>
-          <c:if test="${settings.hasCDSs}">
+          <c:if test="${settings.hasCodingSequences}">
             <td class='main<c:if test="${color_switch}"> alt</c:if>'>
 
                 <c:choose>
@@ -265,8 +260,8 @@
                     <table cellspacing="0">
 
                 <c:choose>
-                  <c:when test="${!empty geneModel.CDSs}">
-                    <c:forEach items="${geneModel.CDSs}" var="cds">
+                  <c:when test="${!empty geneModel.codingSequences}">
+                    <c:forEach items="${geneModel.codingSequences}" var="cds">
                       <tiles:insert page="/model/displaySequenceFeature.jsp">
                         <tiles:put name="feature" beanName="cds"/>
                       </tiles:insert>

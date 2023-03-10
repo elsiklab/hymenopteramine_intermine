@@ -29,7 +29,7 @@ _defaultConfig: function() {
                 }
             },
 
-            subParts: 'CDS, UTR, five_prime_UTR, three_prime_UTR',
+            subParts: 'CodingSequence, UTR, five_prime_UTR, three_prime_UTR',
 
             impliedUTRs: false
         });
@@ -80,8 +80,10 @@ _makeUTRs: function( parent, subparts ) {
     }
 
     // bail if we don't have exons and CDS
-    if( !( exons.length && codeStart < Infinity && codeEnd > -Infinity ) )
+    if( !( exons.length && codeStart < Infinity && codeEnd > -Infinity ) ) {
+        console.log("No exons or CDSs!");
         return subparts;
+    }
 
     // make sure the exons are sorted by coord
     exons.sort( function(a,b) { return a.get('start') - b.get('start'); } );

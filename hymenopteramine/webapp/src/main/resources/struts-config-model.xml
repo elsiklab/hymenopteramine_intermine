@@ -45,8 +45,10 @@
 
 <action path="/initFriendlyMineLinkDisplayer" type="org.intermine.bio.web.FriendlyMineLinkController"/>
 
-<action path="/blast" forward="blast.page"/>
-<!-- <action path="/network" forward="network.page"/> -->
+<action path="/releaseUpdates" forward="releaseUpdates.page"/>
+
 <action path="/help" forward="help.page"/>
 
-<action path="/updates" forward="updates.page"/>
+<action path="/taxonomy" forward="taxonomy.page"/>
+
+<action path="/blast" forward="blast.page"/>

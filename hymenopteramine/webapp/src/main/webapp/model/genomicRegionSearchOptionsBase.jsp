@@ -29,7 +29,6 @@
 
         <link type="text/css" rel="stylesheet" href="model/jquery_ui/css/smoothness/jquery-ui-1.8.13.custom.css"/>
 
-
         <script type="text/javascript">
             //liftOver url, set it before loading "genomic_region_search_options_metabolicmine.js"
             var liftOverUrl = "${WEB_PROPERTIES['genomicRegionSearch.liftOver.url']}";
@@ -38,11 +37,14 @@
             // webData must be defined in base jsp first, and customized page can make use of it.
             var webDataJSON = jQuery.parseJSON('${webData}');
 
-            // genomic region examples read from web.properties
+            // genomic region properties and examples read from web.properties
+            var useAssemblyFilter = ("${WEB_PROPERTIES['genomicRegionSearch.useAssemblyFilter']}" === 'true');
+            var useFullOrgNames = ("${WEB_PROPERTIES['genomicRegionSearch.useFullOrgNames']}" === 'true');
             var exampleSpansFormat1 = "${WEB_PROPERTIES['genomicRegionSearch.exampleSpansFormat1']}";
             var exampleSpansFormat2 = "${WEB_PROPERTIES['genomicRegionSearch.exampleSpansFormat2']}";
             var exampleSpansFormat3 = "${WEB_PROPERTIES['genomicRegionSearch.exampleSpansFormat3']}";
             var exampleOrganism = "${WEB_PROPERTIES['genomicRegionSearch.exampleOrganism']}";
+            var exampleAssembly = "${WEB_PROPERTIES['genomicRegionSearch.exampleAssembly']}"; // ignore if not using assembly dropdown
 
             // Set value to textarea#pasteInput
             jQuery(document).ready(function () {
@@ -74,7 +76,7 @@
 
                   <br/>
 
-                  <a id="region-help-link" href="#">Genome coordinates help</a>
+                  <a id="region-help-link" href="#">More genome coordinates help</a>
                   <script type="text/javascript">
                     jQuery('#region-help-link').click(function(e) {
                         jQuery('#region-help').slideToggle('slow');
@@ -88,7 +90,7 @@
 
                   <br/>
                   <br/>
-                  
+
                   <ol id="optionlist">
 
                     <li id="genomicRegionInput">
@@ -126,7 +128,7 @@
                            </html:link>
                        </div>
 
-                       <html:textarea styleId="pasteInput" property="pasteInput" rows="10" cols="60" onclick="if(this.value != ''){switchInputs('paste','file');}else{openInputs();}" onkeyup="if(this.value != ''){switchInputs('paste','file');}else{openInputs();}" />
+                      <html:textarea styleId="pasteInput" property="pasteInput" rows="10" cols="60" onclick="if(this.value != ''){switchInputs('paste','file');}else{openInputs();}" onkeyup="if(this.value != ''){switchInputs('paste','file');}else{openInputs();}" />
                        <br/>
 
                        <%-- file input --%>

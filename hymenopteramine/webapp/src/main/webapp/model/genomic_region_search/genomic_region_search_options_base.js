@@ -16,4 +16,3 @@
        jQuery('#fileInput').attr("disabled", false);
        jQuery('#pasteInput').attr("disabled", false);
     }
-

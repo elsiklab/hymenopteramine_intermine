@@ -1,7 +1,7 @@
 package org.intermine.api.searchengine.solr;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -254,6 +254,9 @@ public final class SolrKeywordSearchHandler implements KeywordSearchHandler
                     continue;
                 }
 
+                // New: exclude ClassName.id from search results
+                if (("id").equals(value) || value.endsWith("_id")) { continue; }
+
                 fieldNames.add(value);
             }
 
@@ -300,7 +303,8 @@ public final class SolrKeywordSearchHandler implements KeywordSearchHandler
             // add faceting selections
             for (Map.Entry<String, String> facetValue : facetValues.entrySet()) {
                 if (facetValue != null) {
-                    newQuery.addFilterQuery(facetValue.getKey() + ":" + facetValue.getValue());
+                    newQuery.addFilterQuery(facetValue.getKey() + ":\""
+                        + facetValue.getValue() + "\"");
                 }
             }
 

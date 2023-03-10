@@ -1,7 +1,7 @@
 package org.intermine.bio.web.logic;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -234,15 +234,16 @@ public final class GenomicRegionSearchUtil
      * @param genomicRegions list of gr
      * @param extension the flanking
      * @param organismName org short name
+     * @param chrAssembly assembly version
      * @param featureTypes ft
      * @param strandSpecific flag
      * @return map of gr-query
      */
     public static Map<GenomicRegion, Query> createQueryList(
             Collection<GenomicRegion> genomicRegions, int extension, String organismName,
-            Set<Class<?>> featureTypes, boolean strandSpecific) {
-        return createRegionQueries(genomicRegions, extension, organismName, featureTypes,
-                strandSpecific, false);
+            String chrAssembly, Set<Class<?>> featureTypes, boolean strandSpecific) {
+        return createRegionQueries(genomicRegions, extension, organismName, chrAssembly, 
+                featureTypes, strandSpecific, false);
     }
 
     /**
@@ -252,21 +253,22 @@ public final class GenomicRegionSearchUtil
      * @param extension the flanking
      * @param chromInfo chr info map
      * @param organismName org short name
+     * @param chrAssembly assembly version
      * @param featureTypes ft
      * @param strandSpecific flag
      * @return map of gr-query
      */
     public static Map<GenomicRegion, Query> createRegionListQueries(
         Collection<GenomicRegion> genomicRegions, int extension,
-        Map<String, ChromosomeInfo> chromInfo, String organismName, Set<Class<?>> featureTypes,
-        boolean strandSpecific) {
-        return createRegionQueries(genomicRegions, extension, organismName, featureTypes,
-                strandSpecific, true);
+        Map<String, ChromosomeInfo> chromInfo, String organismName, String chrAssembly, 
+        Set<Class<?>> featureTypes, boolean strandSpecific) {
+        return createRegionQueries(genomicRegions, extension, organismName, chrAssembly, 
+                featureTypes, strandSpecific, true);
     }
 
     private static Map<GenomicRegion, Query> createRegionQueries(
             Collection<GenomicRegion> genomicRegions, int extension, String organismName,
-            Set<Class<?>> featureTypes, boolean strandSpecific, boolean idOnly) {
+            String chrAssembly, Set<Class<?>> featureTypes, boolean strandSpecific, boolean idOnly) {
 
         Map<GenomicRegion, Query> queryMap = new LinkedHashMap<GenomicRegion, Query>();
 
@@ -302,6 +304,9 @@ public final class GenomicRegionSearchUtil
             QueryField qfFeatureClass = new QueryField(qcFeature, "class");
 
             QueryField qfChr = new QueryField(qcChr, "primaryIdentifier");
+            // Even if not filtering by assembly, add field to query to preserve expected
+            // order of fields in query results
+            QueryField qfChrAssembly = new QueryField(qcChr, "assembly");
 
             QueryField qfLocStart = new QueryField(qcLoc, "start");
             QueryField qfLocEnd = new QueryField(qcLoc, "end");
@@ -317,6 +322,7 @@ public final class GenomicRegionSearchUtil
                 q.addToSelect(qfFeatureSymbol);
                 q.addToSelect(qfFeatureClass);
                 q.addToSelect(qfChr);
+                q.addToSelect(qfChrAssembly);
                 q.addToSelect(qfLocStart);
                 q.addToSelect(qfLocEnd);
                 q.addToSelect(qfLocStrand);
@@ -365,6 +371,12 @@ public final class GenomicRegionSearchUtil
             SimpleConstraint scChr = new SimpleConstraint(qfChr, ConstraintOp.EQUALS,
                     new QueryValue(chrPID));
             constraints.addConstraint(scChr);
+
+            // Chromosome.assembly = chrAssembly (if applicable)
+            if (chrAssembly != null) {
+                SimpleConstraint scChrAssembly = new SimpleConstraint(qfChrAssembly, ConstraintOp.EQUALS, new QueryValue(chrAssembly));
+                constraints.addConstraint(scChrAssembly);
+            }
 
             // SequenceFeature.class in a list
             constraints.addConstraint(new BagConstraint(qfFeatureClass, ConstraintOp.IN,

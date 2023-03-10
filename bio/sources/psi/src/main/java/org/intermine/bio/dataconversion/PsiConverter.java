@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -67,10 +67,10 @@ public class PsiConverter extends BioFileConverter
     private static final String DEFAULT_DATASOURCE = "";
     private static final String BINDING_SITE = "MI:0117";
     private static final Set<String> INTERESTING_COMMENTS = new HashSet<String>();
-    //private static final String ATH_TAXONID = "3702";  // A. thaliana taxon ID. (ThaleMine)
+    private static final String ATH_TAXONID = "3702";  // A. thaliana taxon ID. (ThaleMine)
     private static final String FLY = "7227";
 
-    protected IdResolver rslv;
+    //protected IdResolver rslv;
 
     /**
      * Constructor
@@ -105,17 +105,15 @@ public class PsiConverter extends BioFileConverter
      */
     @Override
     public void process(Reader reader) throws Exception {
-
-        // // A. thaliana does not use ID resolver, and the alias type is locus name.
+        // Don't use id resolver:
+        // A. thaliana does not use ID resolver, and the alias type is locus name.
         //if (taxonIds.size() == 1 && taxonIds.contains(ATH_TAXONID)) {
         //    aliasType = "locus name";
         //} else {
-        // init reslover
-        if (rslv == null) {
-            //rslv = IdResolverService.getIdResolverByOrganism(taxonIds);
-            // Change to use ID Resolver for fly only:
-            rslv = IdResolverService.getFlyIdResolver();
-        }
+        //    // init reslover
+        //    if (rslv == null) {
+        //        rslv = IdResolverService.getIdResolverByOrganism(taxonIds);
+        //    }
         //}
 
         PsiHandler handler = new PsiHandler();
@@ -661,10 +659,8 @@ public class PsiConverter extends BioFileConverter
             }
 
             for (String identifier : identifiers) {
+                //String newIdentifier = resolveGeneIdentifier(taxonId, datasource, identifier);
                 String newIdentifier = identifier;
-                if (FLY.equals(taxonId)) {
-                    newIdentifier = resolveFlyGeneIdentifier(datasource, identifier);
-                }
                 if (StringUtils.isNotEmpty(newIdentifier)) {
                     String refId = storeGene(field, newIdentifier, taxonId);
                     refIds.add(refId);
@@ -689,9 +685,9 @@ public class PsiConverter extends BioFileConverter
             }
         }
 
-        private String resolveFlyGeneIdentifier(String datasource, String id) {
-            String taxonId = FLY;
-            if (rslv != null && rslv.hasTaxon(taxonId)) {
+        /*
+        private String resolveGeneIdentifier(String taxonId, String datasource, String id) {
+            if (rslv != null) {
                 String identifier = id;
                 int resCount = rslv.countResolutions(taxonId, identifier);
                 if (resCount != 1) {
@@ -705,12 +701,13 @@ public class PsiConverter extends BioFileConverter
             }
 
             // If this is A. thaliana, make ids uppercase.
-            //if (taxonId.equals(ATH_TAXONID)) {
-            //    return id.toUpperCase();
-            //}
+            if (taxonId.equals(ATH_TAXONID)) {
+                return id.toUpperCase();
+            }
 
             return id;
         }
+        */
 
         private String storeGene(String field, String identifier, String taxonId)
             throws SAXException, ObjectStoreException {

@@ -1,7 +1,7 @@
 package org.intermine.bio.web.struts;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -93,7 +93,7 @@ public class SequenceExportAction extends InterMineAction
                 FastaWriterHelper.writeSequence(out, bioSequence);
             } else {
                 PrintWriter out = response.getWriter();
-                out.write("Sequence information not availble for this sequence feature...");
+                out.write("Sequence information not available for this sequence feature...");
                 out.flush();
             }
         }
@@ -105,11 +105,13 @@ public class SequenceExportAction extends InterMineAction
         throws IllegalAccessException, CompoundNotFoundException {
         BioSequence bioSequence;
         BioEntity bioEntity = (BioEntity) obj;
-        // BioSequenceFactory.make() checks for type Protein but doesn't know about
-        // our custom Polypeptide class
         if (bioEntity instanceof Polypeptide) {
+            // BioSequenceFactory doesn't know about Polypeptide, tell it to use
+            // SequenceType=Protein
             bioSequence = BioSequenceFactory.make(bioEntity, SequenceType.PROTEIN);
-        } else {
+        }
+        else {
+            // Otherwise do the usual thing
             bioSequence = BioSequenceFactory.make(bioEntity, SequenceType.DNA);
         }
         if (bioSequence == null) {

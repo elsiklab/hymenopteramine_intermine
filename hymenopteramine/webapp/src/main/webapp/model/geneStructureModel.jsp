@@ -1,15 +1,34 @@
 
 <!-- geneStructureModel.jsp -->
 
+<c:set var="mineUrl" value="${WEB_PROPERTIES['project.sitePrefix']}"/>
+<c:set var="taxon" value="${reportObject.object.organism.taxonId}"/>
+<c:set var="assembly" value="${reportObject.object.chromosome.assembly}"/>
+<c:set var="chrId" value="${reportObject.object.chromosome.primaryIdentifier}"/>
+<c:set var="propKeyTaxon" value="attributelink.JBrowse.Gene.${taxon}.primaryIdentifier.url"/>
+<c:set var="propKeyAssembly" value="jbrowse.link.${taxon}.${assembly}.url"/>
+<c:set var="jBrowsePropTaxon" value="${WEB_PROPERTIES[propKeyTaxon]}"/>
+<c:set var="jBrowsePropAssembly" value="${WEB_PROPERTIES[propKeyAssembly]}"/>
+<c:choose>
+  <c:when test="${!empty jBrowsePropTaxon}">
+    <!-- One assembly per org: -->
+    <c:set var="jBrowseUrl" value="${jBrowsePropTaxon}"/>
+  </c:when>
+  <c:otherwise>
+    <!-- More than one assembly per org: -->
+    <c:set var="jBrowseUrl" value="${jBrowsePropAssembly}"/>
+  </c:otherwise>
+</c:choose>
+
 <div class="collection-of-collections" id="gene-structure-model" style="height:80px">
 
     <link rel="stylesheet" type="text/css" href="jbrowse_renderer/genome.css">
 
 <style>
 /********************************************************
-*   invisible containers, 
-*   for features that also have a renderClass that gets centered, 
-*      and for subfeatures that have rendered children 
+*   invisible containers,
+*   for features that also have a renderClass that gets centered,
+*      and for subfeatures that have rendered children
 *      (currently only subfeatures like this are exons, which have CDS and UTR child divs)
 ********************************************************/
 .feature-name {
@@ -41,68 +60,10 @@
 </style>
 
 <script>
+var mineUrl = '${mineUrl}';
 var pid = '<c:out value="${gene.primaryIdentifier}"/>';
-
-
-var organismMap={
-    "A. cephalotes": "11040",
-    "A. cerana": "4565",
-    "A. colombica": "546953",
-    "A. dorsata": "6998",
-    "A. echinatior": "224",
-    "A. florea": "632646",
-    "A. mellifera": "22",
-    "A. rosae": "791886",
-    "B. bifarius": "646318",
-    "B. impatiens": "13877",
-    "B. terrestris": "19339",
-    "B. treatae": "640796",
-    "B. vancouverensis nearcticus": "639632",
-    "B. vosnesenskii": "647569",
-    "C. calcarata": "27465",
-    "C. cinctus": "793644",
-    "C. costatus": "548505",
-    "C. floridanum": "795622",
-    "C. floridanus": "24950",
-    "C. insularis": "649000",
-    "C. obscurior": "25609",
-    "D. alloeum": "649457",
-    "D. novaeangliae": "94619",
-    "D. quadriceps": "80494",
-    "E. mexicana": "98799",
-    "F. arisanus": "792600",
-    "F. exsecta": "652772",
-    "H. laboriosa": "286412",
-    "H. saltator": "313980",
-    "L. albipes": "314839",
-    "L. humile": "356274",
-    "M. demolitor": "800464",
-    "M. genalis": "667295",
-    "M. pharaonis": "368463",
-    "M. quadrifasciata": "365574",
-    "M. rotundata": "359306",
-    "N. fulva": "777679",
-    "N. lecontei": "802260",
-    "N. melanderi": "681794",
-    "N. vitripennis": "681356",
-    "O. abietinus": "806785",
-    "O. bicornis bicornis": "781512",
-    "O. biroi": "384187",
-    "O. brunneus": "780550",
-    "O. lignaria": "791736",
-    "P. barbatus": "384328",
-    "P. canadensis": "388975",
-    "P. dominula": "392813",
-    "P. gracilis": "563886",
-    "S. invicta": "394298",
-    "T. cornetzi": "589138",
-    "T. curvispinosus": "570444",
-    "T. pretiosum": "808576",
-    "T. septentrionalis": "608901",
-    "T. zeteki": "614739",
-    "V. emeryi": "619364",
-    "W. auropunctata": "461204"
-};
+var jBrowseUrl = '${jBrowseUrl}';
+//console.log("JBrowse url is " + jBrowseUrl);
 
 // Require bare bones jbrowse components without using the main browser object
 require({
@@ -136,12 +97,13 @@ require({
    'JBrowse/Store/Sequence/StaticChunked'
 ],
 function (cookie,dom,domConstruct,domStyle,domClass,Browser,HTMLFeatures,NCList,SimpleFeature,Layout,StaticChunkedSequence) {
-   var hymine = new intermine.Service({root: "http://128.206.116.39:8080/hymenopteramine"});
+   var mymine = new intermine.Service({root: mineUrl});
 
    var query = {
        from: 'Gene',
        select: [
            'chromosome.primaryIdentifier',
+           'chromosome.assembly',
            'transcripts.chromosomeLocation.start',
            'transcripts.chromosomeLocation.end',
            'transcripts.chromosomeLocation.strand',
@@ -149,14 +111,13 @@ function (cookie,dom,domConstruct,domStyle,domClass,Browser,HTMLFeatures,NCList,
            'transcripts.exons.chromosomeLocation.end',
            'transcripts.primaryIdentifier',
            'transcripts.secondaryIdentifier',
-           'transcripts.symbol',
-           'organism.shortName'
+           'transcripts.symbol'
        ],
        where: {
            primaryIdentifier: pid
        }
    };
-   var createJBrowse=function(features,organism){
+   var createJBrowse=function(features){
        var node=dom.byId("gene-structure-model");
        var height=15+Object.keys(features).length*31;
        domStyle.set(node,"height",height+'px');
@@ -165,20 +126,30 @@ function (cookie,dom,domConstruct,domStyle,domClass,Browser,HTMLFeatures,NCList,
              "className" : "RefSeq",
              "subfeatureClasses" : {
                 "wholeCDS" : null,
-                "CDS" : "RefSeq-CDS",
+                "CodingSequence" : "RefSeq-CDS",
                 "UTR" : "RefSeq-UTR"
              },
           },
           "storeClass" : "JBrowse/Store/SeqFeature/NCList",
           "type" : "FeatureTrack",
           "showLabels":false,
-          "onClick"  : {
-              "label": "Feature name {name}\nFeature start {start}\nFeature end {end}",
-              "url": "http://hymenopteragenome.org/Apollo2/" + organismMap[organism] + "/jbrowse/index.html?&loc={name}",
-              "action": "newWindow"
-          },
           "menuTemplate":null
        };
+
+       if (jBrowseUrl) {
+          var jBrowseBaseUrl = jBrowseUrl.substr(0, jBrowseUrl.indexOf('?'));
+          var tracks = jBrowseUrl.substr(jBrowseUrl.indexOf('&tracks='), jBrowseUrl.length);
+          trackConfig.onClick = {
+              "label": "Feature name {name}\nFeature start {start}\nFeature end {end}",
+              "url": jBrowseBaseUrl + "?loc={seq}:{start}..{end}" + tracks,
+              "action": "newWindow"
+          }
+       }
+       else {
+          trackConfig.onClick = {
+              "label": "Feature name {name}\nFeature start {start}\nFeature end {end}"
+          }
+       }
 
        // Fake existence of jbrowse object
        var browser=new Browser({unitTestMode: true});
@@ -210,7 +181,6 @@ function (cookie,dom,domConstruct,domStyle,domClass,Browser,HTMLFeatures,NCList,
        block.endBase = mmax + (mmax-mmin) * 0.1;
        block.domNode=dom.byId("display");
 
-
        // Manually add block to track
        track.blocks=[block];
        track.label=dom.byId("label");
@@ -233,46 +203,39 @@ function (cookie,dom,domConstruct,domStyle,domClass,Browser,HTMLFeatures,NCList,
        }
        track.updateStaticElements({x:0,y:0,width:2000,height:height});
    }
-   hymine.rows(query).then(function(rows) {
+   mymine.rows(query).then(function(rows) {
        var features={};
-       var organism;
        rows.forEach(function printRow(row) {
-           var transcript=row[6];
+           var transcript=row[7];
            if(!(transcript in features)) {
                features[transcript]={
                        "type":"mRNA",
-                       "start": row[1],
-                       "end": row[2],
-                       "strand": parseInt(row[3]),
+                       "seq": row[0],
+                       "assembly": row[1],
+                       "start": row[2],
+                       "end": row[3],
+                       "strand": parseInt(row[4]),
                        "subfeatures":[],
-                       "uniqueID":row[6],
-                       "name":row[6]
+                       "uniqueID":row[7],
+                       "name":row[7]
                    };
            }
-           console.log(row[9]);
-           organism=row[9];
            features[transcript].subfeatures.push({
-                   "start": row[4],
-                   "end": row[5],
-                   "type": "CDS",
+                   "start": row[5],
+                   "end": row[6],
+                   "type": "CodingSequence",
                    "strand": features[transcript].strand
                 });
        });
        
-       createJBrowse(features,organism);
+       createJBrowse(features);
    });
 });
 </script>
-
 
 <div id="display" style="margin:15px;position:absolute;width:75%;"></div>
 <div id="label"></div>
 
 </div>
-
-
-
-
-
 
 <!-- /geneStructureModel.jsp -->

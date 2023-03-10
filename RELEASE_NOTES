@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -7,6 +7,103 @@
  * information or http://www.gnu.org/copyleft/lesser.html.
  *
  */
+InterMine 5.1.0 (August 2022)
+
+#2025 - FAIR: PURLs come from config file
+#2183 - Improve external links using Identifiers.org
+#2287 - Export query result in RDF format
+#2365 - Setting a property to postprocess in project.xml does not work
+#2366 - Generating intermine R2RML mapping
+#2378 - Update SolrKeywordSearchHandler (thanks @sammyjava)
+#2379 - RDF representation for single entity
+#2381 - Add a new webservice to allow BG to RDF representation
+#2382 - Add reccomended properties to Gene and Protein Bioschemas profiles
+#2389 - Improve term assigned to the intermine entity
+#2390 - Apply ontology terms to the attributes too
+#2391 - Missing term applied to the additions file after merging
+
+InterMine 5.0.8 (June 2022)
+
+- Improved user input checks
+
+InterMine 5.0.7 (April 2022)
+
+#2419 - Updated the WS /templates to return dataTypes
+#2425 - Fix XSS issue
+#2427 - Create a WS returning all the templates
+#2428 - Superuser can run whatever template
+#2027 - Added a new generic TSV data source
+      - Completly removed dependencies on jcenter
+      - Added pombe organims to the taxon id to be ingnored by the idresolver
+      - Copyright updated
+	  - Fixed typo in the go evidence code
+
+InterMine 5.0.6 (Dicember 2021)
+
+#2414 - Upgraded psi lib version (thanks @asherpasha)
+#2416 - Log4j upgraded to 2.17.1 (thanks @asherpasha)
+
+InterMine 5.0.5 (Dicember 2021)
+
+#2411 - Log4j-1x compatibility upgrade (thanks @asherpasha)
+
+InterMine 5.0.4 (Dicember 2021)
+
+#2324 - Remove dependency from EBI maven nexus repo
+#2377 - Updated GFF3Record (thanks @sammyjava)
+#2396 - Biogrid extension
+#2392 - Public name can be taken by deleted account
+#2397 - Implement a new WS to summarise templates
+#2398 - Implement a new WS to precompute templates
+#2399 - Update the GET /templates WS to show which templates user can make change
+#2400 - Update the PUT /bluegenes-properties WS to use body
+#2402 - WebProperties WS returns blugenes properties too
+#2404 - Update CI to use Python 3.7
+
+InterMine 5.0.3 (June 2021)
+
+#2375 - Update interpro_keys.properties
+#2376 - Update interpro-go_keys.properties
+#2384 - Enrichment widget not working when changing background population
+
+InterMine 5.0.2 (May 2021)
+
+#2335 - BioGrid data change causing loader to throw Exception
+#2344 - Why feature.setAttribute("scoreType", record.getSource()) in  GFF3Converter.java?
+#2352 - Enrichment web service fails if using ids and background population 
+#2356 - Graph and table windgets WSs do not work when passing IDs
+#2358 - Check the type in the bag upload form
+#2367 - preparation release 5.0.1
+
+InterMine 5.0.1 (May 2021) - Broken
+Due to a sync issue, the bio-webapp 5.0.1 artifact has been built wrapping intermine-webapp 5.0.0 instead of 5.0.1 and as a consequence, it doesn't contains some of the following fixes.
+Please use 5.0.2 instead.
+#2344 - Why feature.setAttribute("scoreType", record.getSource()) in  GFF3Converter.java?
+#2352 - Enrichment web service fails if using ids and background population 
+#2356 - Graph and table windgets WSs do not work when passing IDs
+#2358 - Check the type in the bag upload form
+#2367 - preparation release 5.0.1
+
+InterMine 5.0.0 (April 2021)
+
+#1720 - Need Google OAuth2 authentication web service end points
+#1835 - When trying to create a list with the same name as another list via api, give informative error
+#2173 - Password reset / I forgot my password service
+#2177 - Include bgpath: prefixed tags in responses to lists webservice
+#2201 - Include creation/last modified date in saved queries webservice
+#2263 - Fixed UniprotFastaLoaderTaskTest see #2259
+#2269 - Add externalLink webservice
+#2280 - Webservice for sending feedback
+#2288 - 200 OK response when deleting unauthorized list (instead of 400)
+#2290 - Add appropriate error message when renaming a list to something existing
+#2295 - Webservice as key-value store for Bluegenes properties
+#2315 - Upgrade List: new webservice for bluegenes
+#2325 - Disallow adding tags for unauthorized lists
+#2327 - Frictionless
+#2328 - DataRecord (bioscehmas profile) deprecated 
+#2337 - Support passing project.credits in web-properties ws
+#2345 - Remove dependency on jcenter
+
 InterMine 4.3.1 (March 2021)
 
 #2311 - Continuos Integration with githubactions

@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -65,11 +65,10 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
     private String dataSourceName = null;
     private DataSource dataSource = null;
     private String fastaTaxonId = null;
-    private String geneSource = null;
     private Map<String, String> taxonIds = new HashMap<String, String>();
 
     /**
-     * Append this suffix to the identifier of the BioEntities that are stored.
+     * Append this suffix to the identifier of the BioEnitys that are stored.
      */
     private String idSuffix = "";
 
@@ -108,14 +107,6 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
      */
     public void setIdSuffix(String idSuffix) {
         this.idSuffix = idSuffix;
-    }
-
-    /**
-     * Return identifier suffix value set with setIdSuffix().
-     * @return the identifier suffix
-     */
-    public String getIdSuffix() {
-        return idSuffix;
     }
 
     /**
@@ -175,22 +166,6 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
      */
     protected void setFileArray(File[] files) {
         this.files = files;
-    }
-
-    /**
-     * Gene source for any bioentities created
-     * @param geneSource gene source
-     */
-    public void setGeneSource(String geneSource) {
-        this.geneSource = geneSource;
-    }
-
-    /**
-     * Return the gene source set with setGeneSource()
-     * @return gene source
-     */
-    public String getGeneSource() {
-        return this.geneSource;
     }
 
     /**
@@ -443,7 +418,13 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
      * @return an identifier
      */
     protected String getIdentifier(Sequence bioJavaSequence) {
-        String name = getSequenceHeader(bioJavaSequence);
+        String name = bioJavaSequence.getAccession().getID() + idSuffix;
+        // getID does not seem to work properly
+        // quick fix to get only the primaryidentifier
+        if (name.contains(" ")) {
+            String[] bits = name.split(" ");
+            name = bits[0];
+        }
         // description_line=sp|Q9V8R9-2|41_DROME
         if (name.contains("|")) {
             String[] bits = name.split("\\|");
@@ -451,25 +432,6 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
                 return null;
             }
             name = bits[1];
-        }
-        // Append ID suffix if not already present
-        if ( !(name.endsWith(idSuffix)) ) {
-            name = name + idSuffix;
-        }
-        return name;
-    }
-
-    /**
-     * Returns BioJava Sequence object header.
-     * @return the header string
-     */
-    protected String getSequenceHeader(Sequence bioJavaSequence) {
-        String name = bioJavaSequence.getAccession().getID();
-        // getID does not seem to work properly
-        // quick fix to get only the primaryidentifier
-        if (name.contains(" ")) {
-            String[] bits = name.split(" ");
-            name = bits[0];
         }
         return name;
     }

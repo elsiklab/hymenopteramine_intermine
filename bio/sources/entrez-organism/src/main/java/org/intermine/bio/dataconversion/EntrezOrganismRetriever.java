@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -45,22 +45,22 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Class to fill in organism information using Entrez.
+ * Modified to include API key in requests.
  * @author Mark Woodbridge
  * @author Kim Rutherford
+ * @author
  */
 public class EntrezOrganismRetriever extends Task
 {
     protected static final Logger LOG = Logger.getLogger(EntrezOrganismRetriever.class);
     // see https://eutils.ncbi.nlm.nih.gov/entrez/query/static/esummary_help.html for details
-    //protected static final String ESUMMARY_URL =
-    //    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=taxonomy&retmode=xml&id=";
     protected static final String ESUMMARY_URL =
-        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi";
-    protected static final String propKey = "ncbi.eutils.apiKey";
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=taxonomy&retmode=xml";
     // number of summaries to retrieve per request
     protected static final int BATCH_SIZE = 50;
     private String osAlias = null;
     private String outputFile = null;
+    private static final String PROP_KEY = "ncbi.eutils.apiKey";
 
     /**
      * Set the ObjectStore alias.
@@ -193,10 +193,10 @@ public class EntrezOrganismRetriever extends Task
      * Build the esummary URL with parameters including API key
      * @return String esummary URL with parameters
      */
-    protected static String getEsummaryURL() {
-        String url = ESUMMARY_URL + "?db=taxonomy&retmode=xml";
+    private static String getEsummaryURL() {
+        String url = ESUMMARY_URL;
         // Use API key in url if present
-        String entrezApiKey = PropertiesUtil.getProperties().getProperty(propKey);
+        String entrezApiKey = PropertiesUtil.getProperties().getProperty(PROP_KEY);
         if (entrezApiKey != null) {
             url += "&api_key=" + entrezApiKey;
         }

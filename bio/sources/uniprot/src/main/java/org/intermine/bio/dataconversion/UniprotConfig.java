@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -21,9 +21,10 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 /**
+ * Modified from original to read properties filename from project.xml.
  *
  * @author julie sullivan
- *
+ * @author
  */
 public class UniprotConfig
 {
@@ -95,7 +96,7 @@ public class UniprotConfig
         Properties props = new Properties();
         try {
             props.load(getClass().getClassLoader().getResourceAsStream(propFile));
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Problem loading properties '" + propFile + "'", e);
         }
 

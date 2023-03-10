@@ -1,7 +1,7 @@
 package org.intermine.web.autocompletion;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -86,7 +86,6 @@ public class AutoCompleter
      * @return string array with search results and an error flag at position 0
      */
     public String[] getFastList(String query, String field, String className,  int n) {
-
         String status = "true";
         String[] stringResults = null;
 
@@ -115,7 +114,7 @@ public class AutoCompleter
             }
 
             try {
-                LOG.info("Running solr query with field: " + field + ", query: " + query);
+
                 SolrQuery newQuery = new SolrQuery();
                 newQuery.setQuery(field + ":" + query + "*"); //adding a wildcard in the end
                 newQuery.setRequestHandler("select");
@@ -129,6 +128,7 @@ public class AutoCompleter
                 stringResults = new String[results.size() + 1];
 
                 for (int i = 1; i < results.size() + 1; i++) {
+
                     try {
                         SolrDocument document = results.get(i - 1);
 
@@ -138,8 +138,7 @@ public class AutoCompleter
                         stringResults[i] = document.getFieldValue(field).toString();
 
                     } catch (Exception e) {
-                        status = "No results, try a different search term.";
-                        LOG.info("Exception: " + e);
+                        status = "No results! Please try again.";
                     }
                 }
 

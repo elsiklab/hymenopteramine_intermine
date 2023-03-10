@@ -1,7 +1,7 @@
 package org.intermine.web.struts;
 
 /*
- * Copyright (C) 2002-2021 FlyMine
+ * Copyright (C) 2002-2022 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -23,6 +23,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
@@ -144,7 +145,7 @@ public class KeywordSearchResultsController extends TilesAction
         // there are needed in the form too so we have to use request (i think...)
         request.setAttribute("searchResults", searchResultsParsed);
         request.setAttribute("searchTerm", searchTerm);
-        request.setAttribute("searchBag", searchBag);
+        request.setAttribute("searchBag", StringEscapeUtils.escapeHtml(searchBag));
         request.setAttribute("searchFacetValues", facetValues);
 
         // used for re-running the search in case of creating a list for ALL results
@@ -230,7 +231,8 @@ public class KeywordSearchResultsController extends TilesAction
                         }
                     }
                     if (found) {
-                        facetValues.put(facetField, requestParameter.getValue()[0]);
+                        facetValues.put(facetField,
+                            StringEscapeUtils.escapeHtml(requestParameter.getValue()[0]));
                     }
                 }
             }

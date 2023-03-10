@@ -114,7 +114,7 @@ sub _initialize {
   $self->description($arg{-description} || scalar(localtime()));
   $self->use_score($arg{-use_score} || 0);
   $self->thin_type($arg{-thin_type} || "UTR");
-  $self->thick_type($arg{-thick_type} || "CDS");
+  $self->thick_type($arg{-thick_type} || "CodingSequence");
 
   $self->_print(sprintf('track name="%s" description="%s" useScore=%d',
                         $self->name,
